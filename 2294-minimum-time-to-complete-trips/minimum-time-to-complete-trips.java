@@ -13,9 +13,9 @@ class Solution {
     public long minimumTime(int[] time, int totalTrips) 
     {
         long low=1;
-        int max=Integer.MIN_VALUE;
-        for(int x:time) if(x>max) max=x;
-        long high=(long)max*totalTrips;
+        int min=Integer.MAX_VALUE;
+        for(int x:time) if(x<min) min=x;
+        long high=(long)min*totalTrips;
         while(low<=high)
         {
             long mid=low+(high-low)/2; 
