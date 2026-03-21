@@ -9,7 +9,7 @@ class Solution {
         int left=0;
         for(int right=0;right<n;right++)
         {
-            sum+=nums[right%n];
+            sum+=nums[right];
             while(right-left+1>n-k)
             {
                 sum-=nums[left];
