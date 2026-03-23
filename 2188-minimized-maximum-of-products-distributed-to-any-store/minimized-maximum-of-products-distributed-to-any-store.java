@@ -6,10 +6,10 @@ class Solution
         int count=0;
         for(int i=0;i<n;i++)
         {
-            if(count>shop) return false;
             count+=(nums[i]+k-1)/k;
+            if(count>shop) return false;
         }
-        return count<=shop;
+        return true;
     }
     public int minimizedMaximum(int n, int[] quantities) 
     {
