@@ -6,6 +6,7 @@ class Solution {
         int n=nums.length;
         for(int i=0;i<n;i++)
         {
+            if(sum>wt) return false;
             if(sum+nums[i]<=wt)
             {
                 sum+=nums[i];
@@ -19,6 +20,7 @@ class Solution {
             }
 
         }
+        if(sum>wt) return false;
         if(sum<=wt) d++;
         return d<=days;
 
@@ -29,7 +31,7 @@ class Solution {
         long high=0;
         for(int x:weights)
         {
-            low=Math.max(low, x);
+           // low=Math.max(low, x);
             high+=x;
         }
         while(low<=high)
