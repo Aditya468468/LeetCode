@@ -1,6 +1,7 @@
 class Solution {
 
     int []nums;
+    Random rand=new Random();
     public Solution(int[] nums) 
     {
         this.nums=nums;
@@ -17,7 +18,6 @@ class Solution {
                 list.add(i);
             }
         }
-        Random rand=new Random();
         int idx = rand.nextInt(list.size());
         return list.get(idx);
 
