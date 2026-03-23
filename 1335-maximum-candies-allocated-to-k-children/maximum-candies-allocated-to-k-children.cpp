@@ -1,21 +1,6 @@
 class Solution {
-// private:
-// {
-//     bool isPossible(vector<int>& candies,long long k,long long candy)
-//     {
-//         int n=candies.size();
-//         long long child=0;
-//         for(int i=0;i<n;i++)
-//         {
-//             child+=candies[i]/candy;
-//             if(child>=k) return true;
-//         }
+private:
 
-//         return false;
-//     }
-
-// };
-public:
     bool isPossible(vector<int>& candies,long long k,long long candy)
     {
         int n=candies.size();
@@ -27,8 +12,8 @@ public:
         }
 
         return false;
-    }
-
+    };
+public:
     int maximumCandies(vector<int>& candies, long long k) 
     {
         long long low=1;
