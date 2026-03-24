@@ -16,23 +16,21 @@ class Solution {
         int j=nums.length-1;
         while(i<j)
         {
-            while(i<nums.length && !isVowel(nums[i]))
+            while(i<j && !isVowel(nums[i]))
             {
                 i++;
             }
-            while(j>=0 && !isVowel(nums[j]))
+            while(i<j && !isVowel(nums[j]))
             {
                 j--;
             }
-            if(i<j)
-            {
             char temp = nums[i];
             nums[i]=nums[j];
             nums[j]=temp;
             i++;
             j--;
-            }
+    
         }
-        return new String(nums);
+       return new String(nums);
     }
 }
