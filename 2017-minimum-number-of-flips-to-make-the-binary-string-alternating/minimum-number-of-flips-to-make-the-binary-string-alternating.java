@@ -30,7 +30,7 @@ class Solution {
             if(x!=expected1) op1++;
             if(x!=expected2) op2++;
 
-            if(right-left+1>n) //shrink
+            while(right-left+1>n) //shrink
             {
                 char prev=t.charAt(left);
                 char prevExpected1;
