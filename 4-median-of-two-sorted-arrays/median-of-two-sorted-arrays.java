@@ -4,51 +4,38 @@ class Solution {
     {
         int n=arr1.length;
         int m=arr2.length;
-        int i=0;
-        int j=0;
-        int size=n+m;
-        int idx1=size/2;
-        int idx2=idx1-1;
-        int val1=0,val2=0;
-        int cnt=0;
-    
-        while(i<n && j<m)
+        if(n>m) return findMedianSortedArrays(arr2,arr1);
+        // First Array is Always the smaller
+        int low=0;
+        int high=n;
+        int left=(n+m+1)/2;
+        while(low<=high)
         {
-            if(arr1[i]<=arr2[j])
+            int mid1=low+(high-low)/2;
+            int mid2=left-mid1;
+            int l1=Integer.MIN_VALUE, l2=Integer.MIN_VALUE;
+            int r1=Integer.MAX_VALUE, r2=Integer.MAX_VALUE;
+            if(mid1<n) r1=arr1[mid1];
+            if(mid2<m) r2=arr2[mid2];
+            if(mid1-1>=0) l1=arr1[mid1-1];
+            if(mid2-1>=0) l2=arr2[mid2-1];
+            if(l1<=r2 && l2<=r1)
             {
-                if(idx1==cnt) val1=arr1[i];
-                if(idx2==cnt) val2=arr1[i];
-                cnt++;
-                i++;
+                if((n+m)%2==1) return Math.max(l1,l2);
+                else 
+                {
+                return (Math.max(l1,l2)+Math.min(r1,r2))/2.0;
+                }
             }
-            else if(arr1[i]>arr2[j])
-            {
-                if(idx1==cnt) val1=arr2[j];
-                if(idx2==cnt) val2=arr2[j];
-                cnt++;
-                j++;
-            }
+            else if(l1>r2) high=mid1-1;
+            else low=mid1+1;
+
 
         }
-        while(i<n)
-        {
-            if(idx1==cnt) val1=arr1[i];
-            if(idx2==cnt) val2=arr1[i];
-            i++;
-            cnt++;
-        }
-        while(j<m)
-        {
-            if(idx1==cnt) val1=arr2[j];
-            if(idx2==cnt) val2=arr2[j];
-            j++;
-            cnt++;
-        }
-        if(size%2==0) return ((double)val1+val2)/2;
-        else return (double)val1;
-        
-       
-     
+
+        return 0;
+      
     }
 }
+
 
