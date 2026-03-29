@@ -3,9 +3,6 @@ class Solution {
     {
         int n=nums1.length;
         int m=nums2.length;
-       // if(n>m) return nextGreaterElement(nums2,nums1);
-        // this way nums1-> Always smaller (update)-> Ques ensured nums1<nums2
-        //HashMap<Integer,Integer> map=new HashMap<>();
         int []idx=new int[n];
         for(int i=0;i<n;i++)
         {
@@ -14,6 +11,7 @@ class Solution {
                 if(nums1[i]==nums2[j])
                 {
                     idx[i]=j;
+                    break;
                 }
             }
         }
