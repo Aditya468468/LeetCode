@@ -1,17 +1,30 @@
-import java.util.*;
-
 class Solution {
 
     public boolean rotation(int[] nums,int []sorted, int start, int k)
     {
-        HashSet<Integer> set1=new HashSet<>();
-        HashSet<Integer> set2=new HashSet<>();
+        HashMap<Integer,Integer> map1=new HashMap<>();
+
         for(int i=start;i<start+k;i++)
         {
-            set1.add(nums[i]);
-            set2.add(sorted[i]);
+            map1.put(nums[i],map1.getOrDefault(nums[i],0)+1);
         }
-        if(!set1.equals(set2)) return false;
+        // for(int i=start;i<start+k;i++)
+        // {
+        //     if(!map1.containsKey(sorted[i]))
+        //     {
+        //         return false;
+        //     }
+        //     map1.put(sorted[i],map1.getOrDefault(sorted,0)-1);
+        //     if(map1.get(sorted[i])==0) map1.remove(sorted[i]);
+        // }
+        for(int i=start;i<start+k;i++)
+        {
+            int val = sorted[i];
+            if(!map1.containsKey(val)) return false;
+            map1.put(val, map1.get(val) - 1);
+            if(map1.get(val) == 0) map1.remove(val);
+        }
+
         int n=nums.length;
         int dip=0;
         for(int i=start+1;i<start+k;i++)
@@ -24,7 +37,6 @@ class Solution {
             
         }
         if(nums[start]<nums[start+k-1]) dip++;
-
         return dip<=1;
         
     }
@@ -36,7 +48,7 @@ class Solution {
         List<Integer> div = new ArrayList<>();
         for(int i=1; i*i<=n;i++)
         {
-            if(n%i == 0)
+            if(n%i==0)
             {
                 div.add(i);
                 if(i!=n/i) div.add(n/i);
@@ -45,13 +57,12 @@ class Solution {
 
         int[] sorted = nums.clone();
         Arrays.sort(sorted);
-
-        int sum = 0;
+        int sum=0;
         for(int k:div)
         {
-            boolean can = true;
+            boolean can=true;
 
-            for(int start = 0; start<n; start += k)
+            for(int start = 0; start<n;start+=k)
             {
                 if(!rotation(nums,sorted,start,k))
                 {
@@ -60,7 +71,7 @@ class Solution {
                 }
             }
 
-            if(can) sum += k;
+            if(can) sum+=k;
         }
 
         return sum;
