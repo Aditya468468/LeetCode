@@ -3,10 +3,15 @@ class Solution {
     {
         int n=matrix.length;
         int m=matrix[0].length;
-        for(int i=0;i<n*m;i++)
+        int r=0;
+        int c=m-1;
+        while(r<n && c>=0)
         {
-           if(matrix[i/m][i%m]==target) return true;
+            if(matrix[r][c]==target) return true;
+            else if(matrix[r][c]>target) c--;
+            else r++;
         }
+
         return false;
 
 
