@@ -17,7 +17,7 @@ class Solution {
         // Lets Match.
         for(int i=0;i<n;i++)
         {
-            // if(nums1[i]!=nums2[i])
+            // if(nums1[i]!=nums2[i])//Even if characters are equal at a position, they still “consume” one occurrence from the available pool.
             // {
                 if(i%2==0)
                 {
