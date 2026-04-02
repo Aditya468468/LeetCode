@@ -6,7 +6,7 @@ public:
         int B=nums[1];
         int C=nums[2];
         if(A+B<=C || A+C<=B || B+C<=A) return "none";
-        if(A==B && B==C && A==C) return "equilateral";
+        if(A==B && B==C) return "equilateral";
         else if(A!=B && B!=C && A!=C) return "scalene";
         else return "isosceles";
 
