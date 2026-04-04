@@ -1,37 +1,43 @@
-class Solution {
-    private boolean isPossible(int[]nums,int h,long k)
+
+class Solution 
+{   // Feasibilty.
+    private boolean canEat(int[]nums,int limit,long k)
     {
+        long sum=0;
         int n=nums.length;
-        long total=0;
         for(int i=0;i<n;i++)
         {
-            long hrs=(nums[i]+k-1)/k;
-            total+=hrs;
-            if(total>h) return false; 
+            sum+=(nums[i]+k-1)/k;
+            if(sum>limit) return false;
         }
-        return true;
-    }
-    public int minEatingSpeed(int[] piles, int h) 
-    {
 
+        return true;
+
+    }
+
+    public int minEatingSpeed(int[] nums, int limit) 
+    {
         long low=1;
         long high=Integer.MIN_VALUE;
-        for(int x:piles)
-            if(x>high) high=x;
+        for(int x:nums)
+        {
+            if(high<x) high=x;
+        }
         while(low<=high)
         {
             long mid=low+(high-low)/2;
-            if(isPossible(piles,h,mid))
+            if(canEat(nums,limit,mid))
             {
                 high=mid-1;
             }
-            else
+            else 
             {
                 low=mid+1;
             }
         }
 
         return (int)low;
-        
+
+       
     }
 }
