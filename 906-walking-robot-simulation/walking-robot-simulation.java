@@ -27,10 +27,9 @@ class Solution {
         int x=0;
         int y=0;
         char curr='N';
-        boolean started=false; // to handle-> Obstacle at 0,0
+        boolean started=false; 
         for(int i=0;i<commands.length;i++)
         {
-           // if(i==0) started=true;
     
             if(commands[i]==-2)
             {
@@ -64,7 +63,8 @@ class Solution {
 
             }
 
-            int distance=(int)Math.pow(x,2)+(int)Math.pow(y,2);
+            //int distance=(int)Math.pow(x,2)+(int)Math.pow(y,2);
+            int distance=(x*x)+(y*y);
             if(distance>maxDistance) maxDistance=distance;
             }
 
