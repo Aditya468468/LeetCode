@@ -1,32 +1,31 @@
-class Solution {
-
-    private void generate(int n,List<String> list,StringBuilder str,int o,int c)
+class Solution 
+{
+    private void generate(int n,List<String> list,String s,int open,int close)
     {
-        if(str.length()==2*n)
+        if(open+close==2*n && open==close)
         {
-            list.add(str.toString());
+            list.add(s);
             return;
         }
-        if(o<n)
+        if(open<n)
         {
-            str.append('(');
-            generate(n,list,str,o+1,c);
-            str.deleteCharAt(str.length() - 1);
-        } 
-        if(c<o)
-        {
-            str.append(')');
-            generate(n,list,str,o,c+1);
-            str.deleteCharAt(str.length() - 1);
+            //s=s+'(';
+            generate(n,list,s+'(',open+1,close);
         }
-        
+        if(close<open)
+        {
+            //s+=')';// this will change the state in current fun space.
+            //Wrong we need to keep this as it is
+            generate(n,list,s+')',open,close+1); // and pass new to next fun call.
+            // Else i need to redo it.
+            // (_--> lets say (( okay now,
+            //for the next if block-> (()->3 noo..it should be -> ()
+        }
     }
     public List<String> generateParenthesis(int n) 
     {
         List<String> list=new ArrayList<>();
-        StringBuilder str=new StringBuilder();
-        generate(n,list,str,0,0);
+        generate(n,list,"",0,0);
         return list;
-       
     }
 }
