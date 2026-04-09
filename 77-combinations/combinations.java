@@ -6,6 +6,8 @@ class Solution {
             ans.add(new ArrayList<>(list));
             return;
         }
+        //Pruning-> GPT Helped,For Pruning.
+        if(n - idx + 1 < k - list.size()) return;
         if(idx>n) return;
         //Take it.
         list.add(idx);
