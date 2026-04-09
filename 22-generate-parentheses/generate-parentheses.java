@@ -1,25 +1,30 @@
 class Solution 
 {
-    private void generate(int n,List<String> ans,String s,int open,int close)
+    private void generate(int n,List<String> ans,StringBuilder str,int open,int close)
     {
         if(open+close==2*n && open==close)
         {
-            ans.add(s);
+            ans.add(str.toString());
             return;
         }
         if(open<n)
         {
-            generate(n,ans,s+'(',open+1,close);
+            str.append('(');
+            generate(n,ans,str,open+1,close);
+            str.deleteCharAt(str.length()-1); //Undo
         }
         if(close<open)
         {
-            generate(n,ans,s+')',open,close+1);
+            str.append(')');
+            generate(n,ans,str,open,close+1);
+            str.deleteCharAt(str.length()-1); //Undo-> Backtracking.
+            
         }
     }
     public List<String> generateParenthesis(int n) 
     {
         List<String> ans=new ArrayList<>();
-        generate(n,ans,"",0,0);
+        generate(n,ans,new StringBuilder(),0,0);
 
         return ans;
 
