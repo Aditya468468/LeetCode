@@ -1,27 +1,30 @@
-class Solution 
-{
-    public void generate(int idx,int[]nums,List<Integer> list,List<List<Integer>> ans)
+class Solution {
+
+    private void generate(int idx,List<List<Integer>> ans,List<Integer> list,int []nums)
     {
         if(idx==nums.length)
         {
             ans.add(new ArrayList<>(list));
             return;
         }
-        //take it
+        //Take
         list.add(nums[idx]);
-        generate(idx+1,nums,list,ans);
-        //undo it.
+        generate(idx+1,ans,list,nums);
+
+        //Backtrack->(undo)
         list.remove(list.size()-1);
-        //Dont Take.
-        generate(idx+1,nums,list,ans);
 
-
+        //Not take
+        generate(idx+1,ans,list,nums);
     }
-    public List<List<Integer>> subsets(int[] nums) {
-        
+    public List<List<Integer>> subsets(int[] nums) 
+    {
+
         List<List<Integer>> ans=new ArrayList<>();
-        List<Integer> list=new ArrayList<>();
-        generate(0,nums,list,ans);
+
+        generate(0,ans,new ArrayList<>(),nums);
+
         return ans;
+        
     }
 }
