@@ -15,10 +15,10 @@ class Solution {
             if (list.size()>=3)
             {
                 int x=list.size();
-                int k=list.get(x - 1);
-                int j=list.get(x - 2);
-                int p=list.get(x - 3);
-                int value = (k - p) + (j - p) + (k - j);
+                int k=list.get(x-1);
+                int j=list.get(x-2);
+                int p=list.get(x-3);
+                int value=(k-p)+(j-p)+(k-j);
                 if (value<min)
                 {
                     min=value;
