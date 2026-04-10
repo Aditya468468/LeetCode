@@ -35,15 +35,7 @@ class Solution {
         // Backtrack.
         list.remove(list.size()-1);
         // Not Take Any Occ at that level.
-        // for(int j=idx+1;j<nums.length;j++)
-        // {
-        //     if(nums[j]!=nums[idx])
-        //     {
-        //         comb(j,nums,ans,list,target);
-        //         break;
-        //     }
-        // }
-        int j=upperBound(nums,nums[idx]);
+        int j=upperBound(nums,nums[idx]); //using upperBound.
         comb(j,nums,ans,list,target);
 
         
