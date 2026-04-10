@@ -1,4 +1,23 @@
 class Solution {
+    public int upperBound(int []nums,int x)
+    {
+        int n=nums.length;
+        int low=0;
+        int high=n-1;
+        while(low<=high)
+        {
+            int mid=low+(high-low)/2;
+            if(nums[mid]<=x)
+            {
+                low=mid+1;
+            }
+            else
+            {
+                high=mid-1;
+            }
+        }
+        return low;
+    }
     public void comb(int idx,int[]nums,List<List<Integer>> ans,List<Integer> list,int target)
     {
         if(target==0)
@@ -16,14 +35,17 @@ class Solution {
         // Backtrack.
         list.remove(list.size()-1);
         // Not Take Any Occ at that level.
-        for(int j=idx+1;j<nums.length;j++)
-        {
-            if(nums[j]!=nums[idx])
-            {
-                comb(j,nums,ans,list,target);
-                break;
-            }
-        }
+        // for(int j=idx+1;j<nums.length;j++)
+        // {
+        //     if(nums[j]!=nums[idx])
+        //     {
+        //         comb(j,nums,ans,list,target);
+        //         break;
+        //     }
+        // }
+        int j=upperBound(nums,nums[idx]);
+        comb(j,nums,ans,list,target);
+
         
 
     }
