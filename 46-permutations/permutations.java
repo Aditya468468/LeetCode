@@ -1,6 +1,6 @@
-class Solution {
-    
-    private void perm(int []nums,List<Integer> list,boolean[]used,List<List<Integer>> ans)
+class Solution 
+{
+    private void perm(int[]nums,boolean[]used,List<List<Integer>> ans,List<Integer> list)
     {
         if(list.size()==nums.length)
         {
@@ -9,23 +9,27 @@ class Solution {
         }
         for(int i=0;i<nums.length;i++)
         {
-            if(used[i])
+            if(used[i]==true)
             {
-                continue;
+                continue; //already a part
             }
-            used[i]=true;
+            used[i]=true; //using it,
             list.add(nums[i]);
-            perm(nums,list,used,ans);
-            // Backtrack.
-            list.remove(list.size()-1);
+            perm(nums,used,ans,list);
+            //Backtrack.
             used[i]=false;
+            list.remove(list.size()-1);
+
         }
     }
-    public List<List<Integer>> permute(int[] nums) 
-    {
-        List<List<Integer>> ans = new ArrayList<>();
-        perm(nums,new ArrayList<>(),new boolean[nums.length], ans);
-        return ans;
+
+    public List<List<Integer>> permute(int[] nums) {
+        
+       List<List<Integer>> ans=new ArrayList<>();
+       
+       perm(nums,new boolean[nums.length],ans,new ArrayList<>());
+
+       return ans;
         
     }
 }
