@@ -16,11 +16,15 @@ class Solution {
         // Backtrack.
         list.remove(list.size()-1);
         // Not Take Any Occ at that level.
-        while(idx+1<nums.length && nums[idx]==nums[idx+1])
+        for(int j=idx+1;j<nums.length;j++)
         {
-            idx++;
+            if(nums[j]!=nums[idx])
+            {
+                comb(j,nums,ans,list,target);
+                break;
+            }
         }
-        comb(idx+1,nums,ans,list,target);
+        
 
     }
     public List<List<Integer>> combinationSum2(int[] candidates, int target) 
