@@ -1,38 +1,20 @@
-class Solution 
-{
-    public void generate(int idx,int[]nums,List<Integer> list,List<List<Integer>> ans)
+class Solution {
+
+    private int xorSet(int idx,int sum,int[]nums)
     {
         if(idx==nums.length)
         {
-            ans.add(new ArrayList<>(list));
-            return;
+            return sum;
         }
-        //take it
-        list.add(nums[idx]);
-        generate(idx+1,nums,list,ans);
-        //undo it.
-        list.remove(list.size()-1);
-        //Dont Take.
-        generate(idx+1,nums,list,ans);
-
-
+        //take it.
+        int take=xorSet(idx+1,sum^nums[idx],nums);
+        //Not take it 
+        int notTake=xorSet(idx+1,sum,nums);
+        return take+notTake;
     }
-    public int subsetXORSum(int[] nums) {
+    public int subsetXORSum(int[] nums) 
+    {
         
-        List<List<Integer>> ans=new ArrayList<>();
-        List<Integer> list=new ArrayList<>();
-        generate(0,nums,list,ans);
-        int result=0;
-        for(List<Integer> num:ans)
-        {
-            int value=0;
-            for(int x:num)
-            {
-                value^=x;
-            }
-            result+=value;
-        }
-        
-        return result;
+        return xorSet(0,0,nums);
     }
 }
