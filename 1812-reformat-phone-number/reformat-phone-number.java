@@ -17,28 +17,31 @@ class Solution {
         }
         else
         {
+            StringBuilder temp=new StringBuilder();
             int i=0;
             int len=0;
             while(i<str.length())
             {
                 if(len==3)
                 {
-                    str.insert(i,'-');
+                    temp.append('-');
                     len=0;
                 }
                 else
                 {
+                    temp.append(str.charAt(i));
                     len++;
+                    i++;
                 }
-                i++;
 
             }
             if(len==1)
             {
-                int last=str.length()-1;
-                str.deleteCharAt(last-1);
-                str.insert(last-2,'-');
+                int last=temp.length()-1;
+                temp.deleteCharAt(last-1);
+                temp.insert(last-2,'-');
             }
+            str=temp;
         }
         return str.toString();
 
