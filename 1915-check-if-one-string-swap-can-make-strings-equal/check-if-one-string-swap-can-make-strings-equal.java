@@ -16,11 +16,19 @@ class Solution {
                 else return false;
             }
         }
+        // if(idx2==-1) return false;
+        // if(s1.charAt(idx1)==s2.charAt(idx2) && s1.charAt(idx2)==s2.charAt(idx1))
+        // {
+        //     return true; //cross=matching
+        // }
+        //swaping approach!!!
         if(idx2==-1) return false;
-        if(s1.charAt(idx1)==s2.charAt(idx2) && s1.charAt(idx2)==s2.charAt(idx1))
-        {
-            return true; //cross=matching
-        }
+        StringBuilder str=new StringBuilder(s1);
+        char temp=str.charAt(idx1);
+        str.setCharAt(idx1,str.charAt(idx2));
+        str.setCharAt(idx2,temp);
+        s1=str.toString();
+        if(s1.equals(s2)) return true;
         return false;
     }
 }
