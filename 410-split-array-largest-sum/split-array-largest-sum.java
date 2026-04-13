@@ -1,23 +1,24 @@
 class Solution {
-    private boolean isPossible(int[]nums,int k,long limit)
+
+    private boolean canSplit(int[]nums,int k,long limit)
     {
-        int count=0;
-        long sum=0;
-        for(int x:nums)
+        int cnt=1;
+        int sum=0;
+        for(int i=0;i<nums.length;i++)
         {
-            if(sum+x>limit)
+            if(sum+nums[i]<=limit)
             {
-                count++;
-                sum=x;
+                sum+=nums[i];
             }
             else
             {
-                sum+=x;
+                cnt++;
+                sum=nums[i];
+                if(cnt>k) return false;
             }
         }
-        if(sum<=limit) count++;
-        return count<=k;
-        
+
+        return cnt<=k;
     }
     public int splitArray(int[] nums, int k) 
     {
@@ -25,23 +26,25 @@ class Solution {
         long high=0;
         for(int x:nums)
         {
-            if(low<x) low=x;
+            if(x>low) low=x;
             high+=x;
         }
+
         while(low<=high)
         {
             long mid=low+(high-low)/2;
-            if(isPossible(nums,k,mid))
+            if(canSplit(nums,k,mid))
             {
                 high=mid-1;
             }
-            else
+            else 
             {
                 low=mid+1;
             }
-        }
-        return (int)low;
 
+        }
+
+        return (int)low;
         
     }
 }
