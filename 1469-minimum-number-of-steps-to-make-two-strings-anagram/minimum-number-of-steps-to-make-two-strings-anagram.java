@@ -23,10 +23,11 @@ class Solution {
 
             if(map2.containsKey(key))
             {
-                if(map2.get(key)<=value)
+                if(map2.get(key)<value)
                 {
-                    need+=value-map2.get(key);
+                    need+=value-map2.get(key); 
                 }
+                //if enough is there..no need to do anything at all->else part
             }
             else
             {
