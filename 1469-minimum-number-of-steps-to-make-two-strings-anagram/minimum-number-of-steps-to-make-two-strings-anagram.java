@@ -5,28 +5,28 @@ class Solution {
         //length will be same only naa.
         int n=s.length();
         if(n!=t.length()) return -1;
-        Map<Character,Integer> map=new HashMap<>();
+
+        int[]freq=new int[26];// Using freq Array.
         for(int i=0;i<n;i++)
         {
             char x=s.charAt(i);
-            map.put(x,map.getOrDefault(x,0)+1);
+            freq[x-'a']++;
         }
         for(int i=0;i<n;i++)
         {
             char x=t.charAt(i);
-            map.put(x,map.getOrDefault(x,0)-1);
+            freq[x-'a']--;
+           
         }
         int need=0;
         
-        for(Map.Entry<Character,Integer> it:map.entrySet())
+        for(int i=0;i<freq.length;i++)
         {
-            int value=it.getValue();
-            if(value>0)
+            if(freq[i]>0)
             {
-                need+=value;
+                need+=freq[i];
             }
         }
-
         return need;
 
         
