@@ -1,16 +1,10 @@
 class Solution {
-    //Fast Exponential Method
-    private double pow(double x,long n)
+
+    private double pow(double x,long N)
     {
-        if(n==0) return 1;
-        if(n%2==0)
-        {
-            return pow(x*x,n/2);
-        }
-        else
-        {
-            return x*pow(x,n-1);
-        }
+        if(N==0) return 1; // Base Case
+        if(N%2==0) return pow(x*x,N/2);
+        else return x*pow(x,N-1);
     }
     public double myPow(double x, int n) 
     {
@@ -18,10 +12,10 @@ class Solution {
         if(N<0)
         {
             x=1/x;
-            N=(-1L)*N;
+            N=(-1)*N;
         }
-        
         return pow(x,N);
+
         
     }
 }
