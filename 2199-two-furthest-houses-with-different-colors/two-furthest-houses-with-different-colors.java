@@ -3,21 +3,17 @@ class Solution {
     {
         int max=Integer.MIN_VALUE;
         int n=colors.length;
-        for(int i=0;i<n;i++)
+        int first=colors[0];
+        int last=colors[n-1];
+        if(first!=last) return n-1;
+        for(int i=1;i<n;i++)
         {
-            int curr=colors[i];
-            for(int j=i+1;j<n;j++)
+            if(colors[i]!=first)
             {
-                if(colors[j]!=curr)
-                {
-                    int dis=j-i;
-                    if(dis>max) max=dis;
-
-                }
+                int curr=Math.max(i,n-1-i);
+                if(curr>max) max=curr;
             }
         }
-
         return max;
-        
     }
 }
