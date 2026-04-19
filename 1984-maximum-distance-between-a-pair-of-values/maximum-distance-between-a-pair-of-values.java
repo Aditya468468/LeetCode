@@ -1,42 +1,25 @@
-class Solution 
-{
-    private int far(int[]nums2,int value,int start)
+class Solution {
+    public int maxDistance(int[] nums1, int[] nums2) 
     {
-        int low=start;
-        int high=nums2.length-1;
-
-        while(low<=high)
+        int n=nums1.length;
+        int m=nums2.length;
+        int max=0;
+        int i=0;
+        int j=0;
+        while(i<n && j<m)
         {
-            int mid=low+(high-low)/2;
-            if(nums2[mid]>=value)
+            if(nums1[i]<=nums2[j])
             {
-                low=mid+1;
+                max=Math.max(max,j-i);
+                j++;
             }
             else
             {
-                high=mid-1;
+                i++;
             }
         }
 
-        return high;
-
-    }
-    public int maxDistance(int[] nums1, int[] nums2) 
-    {
-        int maxDis=0;
-        for(int i=0;i<nums1.length;i++)
-        {
-            int idx=far(nums2,nums1[i],i);
-            if(idx!=-1)
-            {
-                int dis=idx-i;
-                if(dis>maxDis) maxDis=dis;
-            }
-        }
-
-        return maxDis;
-
-
+        return max;
         
     }
 }
