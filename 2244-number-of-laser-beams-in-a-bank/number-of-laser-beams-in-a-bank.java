@@ -14,9 +14,11 @@ class Solution {
                     cnt++;
                 }
             }
-            total+=(prevCnt*cnt);
-            if(cnt!=0)
-                prevCnt=cnt;
+            if(cnt>0)
+            {
+            total+=(prevCnt*cnt);                
+            prevCnt=cnt;
+            }
 
         }
 
