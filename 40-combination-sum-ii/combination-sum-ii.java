@@ -13,6 +13,7 @@ class Solution {
         for(int i=idx;i<nums.length;i++)
         {
             if(i>idx && nums[i]==nums[i-1]) continue;
+            if(nums[idx]>target); //Pruning!!
             list.add(nums[i]);
             comb(i+1,nums,ans,list,target-nums[i]);
             list.remove(list.size()-1);
