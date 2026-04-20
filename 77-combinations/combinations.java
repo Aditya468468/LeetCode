@@ -8,12 +8,14 @@ class Solution
             return;
         }
         if(list.size()>k || idx>n) return;
-        //Take it
-        list.add(idx);
-        comb(idx+1,n,k,ans,list);
-        list.remove(list.size()-1);
-        //Not take
-        comb(idx+1,n,k,ans,list);
+        //for-loop
+        for(int i=idx;i<=n;i++)
+        {
+
+            list.add(i);
+            comb(i+1,n,k,ans,list);
+            list.remove(list.size()-1);
+        }
     }
     public List<List<Integer>> combine(int n, int k) 
     {
