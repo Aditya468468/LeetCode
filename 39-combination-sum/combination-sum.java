@@ -11,14 +11,14 @@ class Solution {
         {
             return;
         }
-        //Stay
-        list.add(nums[idx]);
-        count(idx,nums,ans,list,sum-nums[idx]);
-        //BackTrack
-        list.remove(list.size()-1);
-        //Move;
-        count(idx+1,nums,ans,list,sum);
-
+        for(int i=idx;i<nums.length;i++)
+        {
+            list.add(nums[i]);
+            count(i,nums,ans,list,sum-nums[i]);
+            //Back track;
+            list.remove(list.size()-1);
+        
+        }
     }
     public List<List<Integer>> combinationSum(int[] candidates, int target) 
     {
