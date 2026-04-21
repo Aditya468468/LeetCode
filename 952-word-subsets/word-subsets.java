@@ -1,60 +1,51 @@
 class Solution {
     public List<String> wordSubsets(String[] words1, String[] words2) 
     {
-        Map<Character,Integer> map=new HashMap<>();
+        //We need max-freq of char ..as if max exists smaller do exists.
+        int []freq=new int[26];
+        // Lets Build.
         for(int i=0;i<words2.length;i++)
         {
-            Map<Character,Integer> temp=new HashMap<>();
             String s=words2[i];
+            int []temp=new int[26];
             for(int j=0;j<s.length();j++)
             {
-                temp.put(s.charAt(j),temp.getOrDefault(s.charAt(j),0)+1);
+                char ch=s.charAt(j);
+                temp[ch-'a']++;
             }
-
-            for (Map.Entry<Character,Integer> entry:temp.entrySet())
+            //Updating Max-Freq
+            for(int j=0;j<26;j++)
             {
-                char c=entry.getKey();
-                int freq=entry.getValue();
-                map.put(c,Math.max(map.getOrDefault(c, 0),freq));
+                if(temp[j]>freq[j])
+                {
+                  freq[j]=temp[j];
+                }
             }
-
         }
-            List<String> list=new ArrayList<>();
-            for(int i=0;i<words1.length;i++)
+        //Process the words1.
+        List<String> list=new ArrayList<>();
+        for(int i=0;i<words1.length;i++)
+        {
+            String s=words1[i];
+            int []freq2=new int[26];
+            for(int j=0;j<s.length();j++)
             {
-                String s=words1[i];
-                Map<Character,Integer> map2=new HashMap<>();
-                for(int j=0;j<s.length();j++)
-                {
-                    map2.put(s.charAt(j),map2.getOrDefault(s.charAt(j),0)+1);
-                }
-                boolean isValid=true;
-                for(Map.Entry<Character,Integer> it:map.entrySet())
-                {
-                    char key=it.getKey();
-                    int value=it.getValue();
-                    if(!map2.containsKey(key))
-                    {   
-                        isValid=false;
-                        break;
-                    }
-                    else
-                    {
-                        if(map2.get(key)<value)
-                        {
-                            isValid=false;
-                            break;
-                        }
-                    }
-                }
-                if(isValid)
-                {
-                    list.add(s);
-                }
-                
+                char ch=s.charAt(j);
+                freq2[ch-'a']++;
             }
+            //Lets Check if they are Universal
+            boolean isValid=true;
+            for(int j=0;j<26;j++)
+            {
+                if(freq[j]>freq2[j])
+                {
+                    isValid=false;
+                }
+            }
+            
+            if(isValid) list.add(s);
+        }
 
-
-        return list;
+            return list;       
     }
 }
