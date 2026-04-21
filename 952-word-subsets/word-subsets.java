@@ -12,13 +12,9 @@ class Solution {
             {
                 char ch=s.charAt(j);
                 temp[ch-'a']++;
-            }
-            //Updating Max-Freq
-            for(int j=0;j<26;j++)
-            {
-                if(temp[j]>freq[j])
+                if(temp[ch-'a']>freq[ch-'a'])
                 {
-                  freq[j]=temp[j];
+                    freq[ch-'a']=temp[ch-'a']; //Updating Max-Freq
                 }
             }
         }
@@ -40,6 +36,7 @@ class Solution {
                 if(freq[j]>freq2[j])
                 {
                     isValid=false;
+                    break;
                 }
             }
             
