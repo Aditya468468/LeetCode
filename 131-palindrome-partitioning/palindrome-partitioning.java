@@ -1,21 +1,15 @@
-class Solution {
-    private boolean isPalindrome(String s,int start,int end)
+class Solution 
+{
+    boolean isPalindrome(String s,int i,int j)
     {
-        int i=start;
-        int j=end;
         while(i<j)
         {
-            if(s.charAt(i)!=s.charAt(j))
-            {
-                return false;
-            }
+            if(s.charAt(i)!=s.charAt(j)) return false;
             i++;
             j--;
         }
-
         return true;
     }
-
     private void generate(int idx,String s,List<List<String>> ans,List<String> list)
     {
         if(idx==s.length())
@@ -30,7 +24,6 @@ class Solution {
                 list.add(s.substring(idx,i+1));
                 generate(i+1,s,ans,list);
                 list.remove(list.size()-1);
-
             }
         }
     }
@@ -40,6 +33,6 @@ class Solution {
         generate(0,s,ans,new ArrayList<>());
 
         return ans; 
-        
+       
     }
 }
