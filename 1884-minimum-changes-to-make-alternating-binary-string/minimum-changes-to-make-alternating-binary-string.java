@@ -3,6 +3,7 @@ class Solution {
     {
         int cnt1=0; //01010
         int cnt2=0; //10101
+        char []nums=s.toCharArray();
 
         for(int i=0;i<s.length();i++)
         {
@@ -19,7 +20,7 @@ class Solution {
                 exp1='1';
                 exp2='0';
             }
-            char c=s.charAt(i);
+            char c=nums[i];
             if(c!=exp1)
             {
                 cnt1++;
