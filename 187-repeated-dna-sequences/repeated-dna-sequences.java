@@ -1,33 +1,38 @@
 class Solution {
     public List<String> findRepeatedDnaSequences(String s) 
     {
-        HashSet<String> set = new HashSet<>();
+        //We needed Repeated Seq-> That Too One time 
+        HashSet<String> set=new HashSet<>();
         HashSet<String> seen=new HashSet<>();
+        int n=s.length();
+        //Its a Fixed Sized Window-> k=10;
         StringBuilder str=new StringBuilder();
-        for(int i=0;i<s.length();i++)
+        int left=0;
+        for(int right=0;right<s.length();right++)
         {
-            str.append(s.charAt(i));
-            while(str.length()>10)
+            char ch=s.charAt(right);
+            str.append(ch);
+            //Shrink it babes 
+            while(right-left+1>10)
             {
                 str.deleteCharAt(0);
+                left++;
             }
-            if(str.length()==10)
+            if(right-left+1==10)
             {
-                String temp=str.toString();
-                if(set.contains(temp))
+                if(seen.contains(str.toString()))
                 {
-                    seen.add(temp);
+                    set.add(str.toString());
                 }
-                else
+                else 
                 {
-                    set.add(temp);
+                    seen.add(str.toString());
                 }
             }
-        }
-        ArrayList<String> ans=new ArrayList<>(seen);
 
-        return ans;
-        
+        }
+
+        return new ArrayList<>(set);
         
     }
 }
