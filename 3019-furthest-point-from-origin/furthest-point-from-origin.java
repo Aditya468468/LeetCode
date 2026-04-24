@@ -1,6 +1,8 @@
 class Solution {
     public int furthestDistanceFromOrigin(String moves) 
     {
+        // Greedy--> Either go All left or All Right because L&R cancel each other
+        // And As we Want Max Dis->We choose All Left or All Right.
         int left=0;
         int right=0;
         int choice=0;
