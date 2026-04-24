@@ -6,7 +6,7 @@ class Solution {
         return false;
 
     }
-    public int generate(int idx,int n,List<Integer> list, boolean[]used)
+    public int generate(int idx,int n,boolean[]used)
     {
         if(idx>n)
         {
@@ -16,14 +16,13 @@ class Solution {
         for(int i=1;i<=n;i++)
         {
             if(used[i]==true) continue;
-            used[i]=true;
             if(isValid(i,idx))
             {
-                list.add(i);
-                cnt+=generate(idx+1,n,list,used);
-                list.remove(list.size()-1);
+                used[i]=true;
+                cnt+=generate(idx+1,n,used);
+                used[i]=false;
             }
-            used[i]=false;
+    
         }
 
         return cnt;
@@ -32,7 +31,7 @@ class Solution {
     public int countArrangement(int n) 
     {
     
-        return generate(1,n,new ArrayList<>(),new boolean[n+1]);
+        return generate(1,n,new boolean[n+1]);
         
 
         
