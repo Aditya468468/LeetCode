@@ -12,6 +12,8 @@ class Solution {
             Set<Integer> set=new HashSet<>(); // for Unique.
             for(int j=0;j<m;j++)
             {
+                int val=matrix[i][j];
+                if(val<1 || val>n) return false; //value must be in range [1....n]
                 set.add(matrix[i][j]);
             }
             if(set.size()!=n) return false;
@@ -22,6 +24,8 @@ class Solution {
             Set<Integer> set=new HashSet<>(); // for Unique.
             for(int j=0;j<m;j++)
             {
+                int val=matrix[j][i];
+                if(val<1 || val>n) return false;
                 set.add(matrix[j][i]);
             }
             if(set.size()!=n) return false;
