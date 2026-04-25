@@ -34,28 +34,26 @@ class Solution {
 
     }
 
-    public void check(int row,List<StringBuilder> board,List<List<String>> ans)
+    public int check(int row,List<StringBuilder> board)
     {
         if(row==board.size())
         {
-            List<String> temp = new ArrayList<>();
-            for (StringBuilder sb : board) 
-            {
-                temp.add(sb.toString());
-            }
-            ans.add(new ArrayList<>(temp));
-            return;
+           
+            return 1;
         }
+        int cnt=0;
         for(int col=0;col<board.size();col++)
         {
             if(isPossible(row,col,board))
             {
-                board.get(row).setCharAt(col,'Q');
-                check(row+1,board,ans);
+                 board.get(row).setCharAt(col,'Q');
+                cnt+=check(row+1,board);
                 board.get(row).setCharAt(col,'.'); //backtrack
 
             }
         }
+
+        return cnt;
     }
     public int totalNQueens(int n) 
     {
@@ -71,12 +69,11 @@ class Solution {
             }
             board.add(str);
         }
-        List<List<String>> ans=new ArrayList<>();
-        check(0,board,ans);
+
+        return check(0,board);
 
 
-    
-        return ans.size();
+
 
         
     
