@@ -1,27 +1,21 @@
 class Solution {
-
-    private int find(int idx,List<Integer> list,int k)
-    {
-        if(list.size()==1)
-        {
-            return list.get(0);
-        }
-        //eliminate,
-        int i=(idx+k-1)%list.size();
-        list.remove(i);
-        return find(i%list.size(),list,k);
-
-    }
     public int findTheWinner(int n, int k) 
     {
-        //lets prepare the List.
-        List<Integer> list=new ArrayList<>();
+        Deque<Integer> q=new ArrayDeque<>();
         for(int i=1;i<=n;i++)
         {
-            list.add(i);
+            q.addLast(i);
         }
-
-        return find(0,list,k);
+        int idx=0;
+        while(q.size()>1)
+        {
+            for(int i=1;i<k;i++)
+            {
+                q.addLast(q.removeFirst()); //Removing nd Adding.
+            }
+            q.removeFirst(); //Removing kth Element.
+        }
+       return q.peek();
         
     }
 }
