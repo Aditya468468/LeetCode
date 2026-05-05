@@ -13,29 +13,30 @@ class Solution
         map.put('8',"tuv");
         map.put('9',"wxyz");
     }
-    public void comb(int idx,String num,List<String> ans,StringBuilder str)
+
+    private void comb(int idx,String digits,List<String> ans,StringBuilder str)
     {
-        if(idx==num.length())
+        if(str.length()==digits.length())
         {
-            ans.add((new StringBuilder(str)).toString());
+            ans.add(new String(str.toString()));
             return;
         }
-
-        String s=map.get(num.charAt(idx));
-        for(char x:s.toCharArray())
+        String curr=map.get(digits.charAt(idx));
+        for(int i=0;i<curr.length();i++)
         {
-            str.append(x);
-            comb(idx+1,num,ans,str);
-            str.deleteCharAt(str.length()-1); //backtrack.
-
+            str.append(curr.charAt(i));
+            comb(idx+1,digits,ans,str);
+            str.deleteCharAt(str.length()-1);
         }
     }
+
     public List<String> letterCombinations(String digits) 
     {
         List<String> ans=new ArrayList<>();
         comb(0,digits,ans,new StringBuilder());
 
         return ans;
+
         
     }
 }
