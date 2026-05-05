@@ -1,33 +1,26 @@
 class Solution {
     public int minSteps(String s, String t) 
     {
-
-        //length will be same only naa.
-        int n=s.length();
-        if(n!=t.length()) return -1;
-
-        int[]freq=new int[26];// Using freq Array.
-        for(int i=0;i<n;i++)
+        int[] freqS=new int[26];
+        int[] freqT=new int[26];
+        for(char x:s.toCharArray())
         {
-            char x=s.charAt(i);
-            freq[x-'a']++;
+            freqS[x-'a']++;
         }
-        for(int i=0;i<n;i++)
+        int ans=0;
+        for(char x:t.toCharArray())
         {
-            char x=t.charAt(i);
-            freq[x-'a']--;
-           
+            freqT[x-'a']++;
         }
-        int need=0;
-        
-        for(int i=0;i<freq.length;i++)
+        for(int i=0;i<26;i++)
         {
-            if(freq[i]>0)
+            if(freqS[i]<freqT[i])
             {
-                need+=freq[i];
+                ans+=freqT[i]-freqS[i];
             }
         }
-        return need;
+
+        return ans;
 
         
     }
