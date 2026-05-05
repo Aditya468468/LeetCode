@@ -1,30 +1,25 @@
 class Solution {
     public int minSteps(String s, String t) 
     {
-        int[]freq1=new int[26];
-        int[]freq2=new int[26];
-
-        for(int i=0;i<s.length();i++)
+        int[] freqS=new int[26];
+        int[] freqT=new int[26];
+        for(char x:s.toCharArray())
         {
-            char x=s.charAt(i);
-            freq1[x-'a']++;
+            freqS[x-'a']++;
         }
-        for(int i=0;i<t.length();i++)
+         for(char x:t.toCharArray())
         {
-            char x=t.charAt(i);
-            freq2[x-'a']++;
+            freqT[x-'a']++;
         }
-        
-        int need=0;
-
+        int ops=0;
         for(int i=0;i<26;i++)
         {
-            need+=Math.abs(freq1[i]-freq2[i]);
+            ops+=Math.abs(freqS[i]-freqT[i]);
+
         }
 
-        return need;
-
-
+        return ops;
+        
         
     }
 }
