@@ -2,49 +2,31 @@ class Solution {
     public String reformatNumber(String number) 
     {
         StringBuilder str=new StringBuilder();
-        for(char x:number.toCharArray())
+        int len=0;
+        for(int i=0;i<number.length();i++)
         {
-            if(Character.isDigit(x))
+            char ch=number.charAt(i);
+            if(len==3 && Character.isDigit(ch)) //If len=3 and I found More Digit
+                                               //Then Only we append "-".
             {
-                str.append(x);
+                str.append('-');
+                len=0;
             }
-        }
-        //Just digits.
-        if(str.length()<4) return str.toString();
-        if(str.length()==4)
-        {
-            str.insert(2,'-');
-        }
-        else
-        {
-            StringBuilder temp=new StringBuilder();
-            int i=0;
-            int len=0;
-            while(i<str.length())
+            if(Character.isDigit(ch))
             {
-                if(len==3)
-                {
-                    temp.append('-');
-                    len=0;
-                }
-                else
-                {
-                    temp.append(str.charAt(i));
-                    len++;
-                    i++;
-                }
+                len++;
+                str.append(ch);
 
             }
-            if(len==1)
-            {
-                int last=temp.length()-1;
-                temp.deleteCharAt(last-1);
-                temp.insert(last-2,'-');
-            }
-            str=temp;
         }
+        if(len==1) //Handling it Explicitly.
+        {
+            int lastIdx=str.length()-1;
+            str.deleteCharAt(lastIdx-1);
+            str.insert(lastIdx-2,'-');
+        }
+
         return str.toString();
-
         
     }
 }
