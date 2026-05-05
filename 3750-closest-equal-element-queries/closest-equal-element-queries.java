@@ -1,16 +1,16 @@
 class Solution {
-    public int BS(List<Integer> list, int x)
+    private int BS(List<Integer> list,int k)
     {
         int low=0;
         int high=list.size()-1;
         while(low<=high)
         {
             int mid=low+(high-low)/2;
-            if(list.get(mid)==x)
+            if(list.get(mid)==k)
             {
                 return mid;
             }
-            else if(list.get(mid)>x)
+            else if(list.get(mid)>k)
             {
                 high=mid-1;
             }
@@ -18,63 +18,46 @@ class Solution {
             {
                 low=mid+1;
             }
-
         }
-
-        return -1;
+        return -1; //dummy
 
     }
     public List<Integer> solveQueries(int[] nums, int[] queries) 
     {
+        HashMap<Integer,List<Integer>> map=new HashMap<>();
         int n=nums.length;
-        Map<Integer,List<Integer>> map=new HashMap<>();
         for(int i=0;i<nums.length;i++)
         {
-            int x=nums[i];
-            if(!map.containsKey(x))
+            if(!map.containsKey(nums[i]))
             {
-                map.put(x,new ArrayList<>());
+                map.put(nums[i],new ArrayList<>());
             }
-            map.get(x).add(i);
+            map.get(nums[i]).add(i);
         }
-
         List<Integer> ans=new ArrayList<>();
-
         for(int i=0;i<queries.length;i++)
         {
-            int elem=nums[queries[i]];
-            List<Integer> temp=map.get(elem);
-            if(temp.size()==1)
+            int q=queries[i];
+            List<Integer> idx=map.get(nums[q]);
+            if(idx.size()==1) 
             {
                 ans.add(-1);
                 continue;
             }
-            int q=queries[i];
-            int idx=BS(temp,queries[i]); //First pos.
-            int left = temp.get((idx - 1 + temp.size()) % temp.size());
-            int right = temp.get((idx + 1) % temp.size());
-            int minDist = Integer.MAX_VALUE;
-
-        // LEFT
-            if(left != q) {
-                int d = Math.abs(q - left);
-                minDist = Math.min(minDist, Math.min(d, n - d));
-            }
-
-        // RIGHT
-            if(right != q) {
-                int d = Math.abs(q - right);
-                 minDist = Math.min(minDist, Math.min(d, n - d));
-            }
-
-            ans.add(minDist);
+            int m=idx.size();
+            int pos=BS(idx,q);
+            int left=idx.get((pos-1+m)%m);
+            int right=idx.get((pos+1)%m);
+            int disL=Math.abs(left-q);
+            int disR=Math.abs(right-q);
+            // Here we can reach by n-d also-> clock and Anti
+            disL=Math.min(disL,n-disL);
+            disR=Math.min(disR,n-disR);
+            ans.add(Math.min(disL, disR));
             
         }
 
         return ans;
-
-
-
         
     }
 }
