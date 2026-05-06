@@ -7,17 +7,17 @@ class Solution {
         // 
         for(int i=0;i<n;i++)
         {
-            int gapIdx=-1;
+            int gapIdx=-1; //Keeps track of first Gap.
             for(int j=m-1;j>=0;j--)
             {
                 char ch=boxGrid[i][j];
                 if(gapIdx==-1 && boxGrid[i][j]=='.')
                 {
-                    gapIdx=j;
+                    gapIdx=j; //store first Gap.
                 }
                 else if(ch=='*')
                 {
-                    gapIdx=-1;
+                    gapIdx=-1; //As Obs comes, Now prev Gaps are irrelevant.
     
                 }
                 else if(ch=='#' && gapIdx!=-1)
@@ -26,7 +26,7 @@ class Solution {
                     char temp=boxGrid[i][gapIdx];
                     boxGrid[i][gapIdx]=boxGrid[i][j];
                     boxGrid[i][j]=temp;
-                    gapIdx--;
+                    gapIdx--; // As Gaps are Consecutive.
         
                 }
             }
@@ -37,7 +37,7 @@ class Solution {
         {
             for(int j=0;j<m;j++)
             {
-                ans[j][n-1-i]=boxGrid[i][j]; //Ahh spent more time thinking Maths.
+                ans[j][n-1-i]=boxGrid[i][j]; 
 
             }
         }
