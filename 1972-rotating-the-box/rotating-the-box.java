@@ -7,19 +7,27 @@ class Solution {
         // 
         for(int i=0;i<n;i++)
         {
+            int gapIdx=-1;
             for(int j=m-1;j>=0;j--)
             {
                 char ch=boxGrid[i][j];
-                if(ch=='#')
+                if(gapIdx==-1 && boxGrid[i][j]=='.')
                 {
-                    int k=j;
-                    while(k<m-1 && boxGrid[i][k+1]=='.')
-                    {
-                        char temp=boxGrid[i][k];
-                        boxGrid[i][k]=boxGrid[i][k+1];
-                        boxGrid[i][k+1]=temp;
-                        k++;
-                    }
+                    gapIdx=j;
+                }
+                else if(ch=='*')
+                {
+                    gapIdx=-1;
+    
+                }
+                else if(ch=='#' && gapIdx!=-1)
+                {
+                    
+                    char temp=boxGrid[i][gapIdx];
+                    boxGrid[i][gapIdx]=boxGrid[i][j];
+                    boxGrid[i][j]=temp;
+                    gapIdx--;
+        
                 }
             }
         }
