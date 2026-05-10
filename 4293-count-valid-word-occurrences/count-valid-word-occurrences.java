@@ -67,12 +67,8 @@ class Solution
                 {
                     if(word.length()>0)
                     {
-                       
-                        
-                             String temp=word.toString();
-                                map.put(temp,map.getOrDefault(temp,0)+1);
-                            
-                        
+                        String temp=word.toString();
+                        map.put(temp,map.getOrDefault(temp,0)+1);
                         word.setLength(0);
                     }
                     
@@ -81,16 +77,11 @@ class Solution
                 
             }
         
-                    if(word.length()>0)
-                    {
-                       
-                        
-                             String temp=word.toString();
-                             map.put(temp,map.getOrDefault(temp,0)+1);
-                            
-                        
-        
-                    }
+            if(word.length()>0)
+                {
+                    String temp=word.toString();
+                    map.put(temp,map.getOrDefault(temp,0)+1);
+                }
         
         
         int []ans=new int[queries.length];
