@@ -1,18 +1,9 @@
 class Solution 
 {
-    public class Pair
-    {
-        int first;
-        int last;
-        public Pair(int first,int last)
-        {
-            this.first=first;
-            this.last=last;
-        }
-    }
+    
     public int maxLengthBetweenEqualCharacters(String s) 
     {
-        HashMap<Character,Pair> map=new HashMap<>();
+        HashMap<Character,Integer> map=new HashMap<>();
         char []nums=s.toCharArray();
         int n=nums.length;
         int max=Integer.MIN_VALUE;
@@ -21,15 +12,14 @@ class Solution
             char x=nums[i];
             if(!map.containsKey(x))
             {
-                map.put(x,new Pair(i,i));// First and last same.
+                map.put(x,i);
             }
-            else if(map.containsKey(x))
+            else
             {
-                int pos=map.get(x).first;
+                int pos=map.get(x);
                 int len=i-pos+1; //Len of subarray
                 len=len-2; //exclude the similar.
                 max=Math.max(max,len);
-                map.get(x).last=i;
             }
            
         }
