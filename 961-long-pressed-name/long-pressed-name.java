@@ -1,45 +1,29 @@
 class Solution {
-    class Pair
-    {
-        char x;
-        int count;
-        public Pair(char x,int count)
-        {
-            this.x=x;
-            this.count=count;
-        }
-    }
-    public List<Pair> build(String s)
-    {
-        List<Pair> list=new ArrayList<>();
-        int i=0;
-        while(i<s.length())
-        {
-            char ch=s.charAt(i);
-            int cnt=0;
-            while(i<s.length() && s.charAt(i)==ch)
-            {
-                cnt++;
-                i++;
-            }
-            list.add(new Pair(ch,cnt));
-        }
-        return list;
-
-    }
     public boolean isLongPressedName(String name, String typed) 
     {
-
-        List<Pair> n=build(name);
-        List<Pair> t=build(typed);
-        if(n.size()!=t.size()) return false;
-        for(int i=0;i<n.size();i++)
+        int idx=0;
+        int i=0;
+        while(i<typed.length())
         {
-            if(n.get(i).x!=t.get(i).x) return false;
-            if(n.get(i).count>t.get(i).count) return false;
+            if(idx<name.length() && name.charAt(idx)==typed.charAt(i))
+            {
+                idx++;
+                i++; //We Move Both
+            }
+            else if(i>0 && typed.charAt(i-1)==typed.charAt(i))
+            {
+                // can we still move-> Checking adj duplicates->Long Pressed.
+                i++;
+            }
+            else
+            {
+                return false; //if both isnt well->FALSE
+            }
+
+
         }
-        
-        return true;
+
+        return idx==name.length(); //Did we consume whole name
         
     }
 }
