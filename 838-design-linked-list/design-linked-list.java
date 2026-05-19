@@ -1,24 +1,25 @@
-class MyLinkedList 
+
+class Node
 {
     int data;
-    MyLinkedList next;
-    MyLinkedList head;
-    
-    public MyLinkedList getHead()
+    Node next;
+    public Node(int data)
+    {
+        this.data=data;
+    }
+}
+class MyLinkedList 
+{
+    Node head;
+    public Node getHead()
     {
         return this.head;
     }
     public MyLinkedList() 
     {
-        this.data=0;
-        this.next=null;
+        //Umm Not Using
     }
-    public MyLinkedList(int data) 
-    {
-        this.data=data;
-        this.next=null;
-    }
-    
+
     public int get(int index) 
     {
         if(head==null)
@@ -26,7 +27,7 @@ class MyLinkedList
             return -1;
         }
         int cnt=0;
-        MyLinkedList temp=head;
+        Node temp=head;
         while(temp!=null)
         {
             if(cnt==index)
@@ -41,7 +42,7 @@ class MyLinkedList
     }
     public void addAtHead(int val) 
     {
-        MyLinkedList node=new MyLinkedList(val);
+        Node node=new Node(val);
         if(head==null)
         {
             head=node;
@@ -54,13 +55,13 @@ class MyLinkedList
     
     public void addAtTail(int val) 
     {
-        MyLinkedList node=new MyLinkedList(val);
+        Node node=new Node(val);
         if(head==null)
         {
             head=node;
             return;
         }
-        MyLinkedList temp=head;
+        Node temp=head;
         while(temp.next!=null)
         {
             temp=temp.next;
@@ -72,7 +73,7 @@ class MyLinkedList
     
     public void addAtIndex(int index, int val) 
     {
-        MyLinkedList node=new MyLinkedList(val);
+       Node node=new Node(val);
         if(index==0)
         {
             addAtHead(val);
@@ -82,8 +83,8 @@ class MyLinkedList
         {
             return;
         }
-        MyLinkedList temp=head;
-        MyLinkedList prev=null;
+        Node temp=head;
+        Node prev=null;
         int cnt=0;
         while(temp!=null && cnt!=index)
         {   
@@ -106,14 +107,14 @@ class MyLinkedList
         }
         if(index==0)
         {
-            MyLinkedList temp=head;
+           Node temp=head;
             head=head.next;
             temp.next=null;
             return;
         }
         int cnt=0;
-        MyLinkedList temp=head;
-        MyLinkedList prev=null;
+        Node temp=head;
+        Node prev=null;
         while(temp!=null && cnt!=index)
         {
             prev=temp;
