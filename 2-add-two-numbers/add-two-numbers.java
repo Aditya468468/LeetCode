@@ -14,80 +14,25 @@ class Solution {
         ListNode temp1=l1;
         ListNode temp2=l2;
         int carry=0;
-        ListNode head=null;
-        ListNode curr=null;
-        while(temp1!=null && temp2!=null)
+        ListNode dummy=new ListNode(-1);
+        ListNode curr=dummy;
+        while(temp1!=null || temp2!=null || carry!=0)
         {
-            int sum=temp1.val+temp2.val+carry;
-            if(sum>9)
-            {
-                sum=sum%10;
-                carry=1;
-            }
-            else
-            {
-                carry=0;
-            }
-            if(head==null)
-            {
-                head=new ListNode(sum);
-                curr=head;
-                
-            }
-            else
-            {
-                ListNode node=new ListNode(sum);
-                curr.next=node;
-                curr=curr.next;
-            }
-            temp1=temp1.next;
-            temp2=temp2.next;
+            int sum=carry;
+            if(temp1!=null) sum+=temp1.val;
+            if(temp2!=null) sum+=temp2.val;
+            //Insertion.
+            ListNode node=new ListNode(sum%10);
+            curr.next=node; //Connection
+            curr=node;  //Movement
+            carry=sum/10;
+            
+            if(temp1!=null) temp1=temp1.next;
+            if(temp2!=null) temp2=temp2.next;
         }
-        // Either l1 || l2 would have ended.. But other remains.
-
-        while(temp1!=null)
-        {
-            int sum=temp1.val+carry;
-            if(sum>9)
-            {
-                sum=sum%10;
-                carry=1;
-            }
-            else 
-            {
-                carry=0;
-            }
-            ListNode node=new ListNode(sum);
-            curr.next=node;
-            curr=node;
-            temp1=temp1.next;
-        }
-        while(temp2!=null)
-        {
-            int sum=temp2.val+carry;
-            if(sum>9)
-            {
-                sum=sum%10;
-                carry=1;
-            }
-            else 
-            {
-                carry=0;
-            }
-            ListNode node=new ListNode(sum);
-            curr.next=node;
-            curr=node;
-            temp2=temp2.next;
-        }
-        // After all this there can be still Carry remaning.
-        if(carry!=0)
-        {
-            ListNode node=new ListNode(carry);
-            curr.next=node;
-            curr=node;
-        }
-
-        return head;
+       
+       
+        return dummy.next; //Safely stores Head.
 
         
     }
