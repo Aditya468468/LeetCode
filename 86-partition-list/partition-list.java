@@ -11,6 +11,10 @@
 class Solution {
     public ListNode partition(ListNode head, int x) 
     {
+        if(head==null)
+        {
+            return null;
+        }
         ListNode dummySmaller=new ListNode(-1);
         ListNode dummyGreater=new ListNode(-1);
         ListNode smaller=dummySmaller;
@@ -18,6 +22,7 @@ class Solution {
         ListNode temp=head;
         while(temp!=null)
         {
+
             ListNode nextNode=temp.next;
             if(temp.val<x)
             {
