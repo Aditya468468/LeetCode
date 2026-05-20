@@ -15,34 +15,20 @@ class Solution {
         {
             return head;
         }
-        ListNode oddHead=head;
         ListNode odd=head;
-        ListNode evenHead=head.next;
-        ListNode even=evenHead;
-        ListNode temp=evenHead.next;
-        boolean flag=true;
-        while(temp!=null)
+        ListNode even=head.next;
+        ListNode evenHead=even;
+        while(even!=null && even.next!=null) // As Even Pointer will be ahead of odd as pattern says-> Odd->Even.
         {
-            if(flag)
-            {   
-                odd.next=temp;
-                odd=temp;
-                flag=false;
-
-            }
-            else 
-            {
-                even.next=temp;
-                even=temp;
-                flag=true;
-
-            }
-            temp=temp.next;
-        }
+            odd.next=odd.next.next;
+            odd=odd.next;
+            even.next=even.next.next;
+            even=even.next;
+            //Wonderful
+        } 
         odd.next=evenHead;
-        even.next=null;
-
-        return oddHead;
+        return head;
+        
         
     }
 }
