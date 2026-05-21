@@ -1,28 +1,31 @@
 class Solution {
-    private boolean isPossible(int[]nums,long k,long cand)
+    private boolean canDistribute(int[]candies,long k,long mid)
     {
-        int n=nums.length;
-        long count=0;//Children 
-        for(int i=0;i<n;i++)
+        long cnt=0;
+        for(int i=0;i<candies.length;i++)
         {
-            long x=nums[i]/cand;
-            count+=x;
-            if(count>=k) return true;
-
+            long x=candies[i]/mid;
+            cnt+=x;
+            if(cnt>=k) return true;
+    
         }
+
         return false;
     }
     public int maximumCandies(int[] candies, long k) 
     {
+        if(candies.length==0) return 0;
         long low=1;
-        long totalSum=0;
-        for(int x:candies) totalSum+=x;
-        long high=(long)(totalSum/k);
-        if(totalSum<k) return 0;
+        long high=-1;
+        for(int x:candies)
+        {
+            if(x>high) high=x;
+        }
+
         while(low<=high)
         {
             long mid=low+(high-low)/2;
-            if(isPossible(candies,k,mid))
+            if(canDistribute(candies,k,mid))
             {
                 low=mid+1;
             }
@@ -32,6 +35,7 @@ class Solution {
             }
         }
 
-            return (int)high;
+        return (int)high;
+        
     }
 }
