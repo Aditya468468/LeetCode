@@ -18,38 +18,35 @@ class Solution {
         ListNode temp2=list2;
         while(temp1!=null && temp2!=null)
         {
-            ListNode node=new ListNode();
             if(temp1.val<temp2.val)
             {
-                node.val=temp1.val;
-                curr.next=node;
-                curr=node;
+               
+                curr.next=temp1;
+                curr=temp1;
                 temp1=temp1.next;
             }
             else
             {
-                node.val=temp2.val;
-                curr.next=node;
-                curr=node;
+
+                curr.next=temp2;
+                curr=temp2;
                 temp2=temp2.next;
             }
             
         }
         while(temp1!=null)
         {
-            ListNode node=new ListNode();
-            node.val=temp1.val;
-            curr.next=node;
-            curr=node;
+           
+            curr.next=temp1;
+            curr=temp1;
             temp1=temp1.next;
 
         }
         while(temp2!=null)
         {
-            ListNode node=new ListNode();
-            node.val=temp2.val;
-            curr.next=node;
-            curr=node;
+            
+            curr.next=temp2;
+            curr=temp2;
             temp2=temp2.next;
 
         }
