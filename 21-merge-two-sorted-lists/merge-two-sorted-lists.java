@@ -34,21 +34,14 @@ class Solution {
             }
             
         }
-        while(temp1!=null)
+        //we can directly link it,because remaining part is already sorted chain
+        if(temp1==null)
         {
-           
-            curr.next=temp1;
-            curr=temp1;
-            temp1=temp1.next;
-
-        }
-        while(temp2!=null)
-        {
-            
             curr.next=temp2;
-            curr=temp2;
-            temp2=temp2.next;
-
+        }
+        else
+        {
+            curr.next=temp1;
         }
        
         return dummy.next;
