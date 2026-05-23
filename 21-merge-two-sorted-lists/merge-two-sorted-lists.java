@@ -11,33 +11,49 @@
 class Solution {
     public ListNode mergeTwoLists(ListNode list1, ListNode list2) 
     {
-        //Data Replacement/Data Extraction
-        ArrayList<Integer> list=new ArrayList<>();
-        ListNode temp1=list1;
-        ListNode temp2=list2;
-        while(temp1!=null || temp2!=null)
-        {
-            if(temp1!=null)
-            {
-                list.add(temp1.val);
-                temp1=temp1.next;
-            }
-            if(temp2!=null)
-            {
-                list.add(temp2.val);
-                temp2=temp2.next;
-            }
-        }
-        Collections.sort(list);
+        //Optimal
         ListNode dummy=new ListNode(-1);
         ListNode curr=dummy;
-        for(int i=0;i<list.size();i++)
+        ListNode temp1=list1;
+        ListNode temp2=list2;
+        while(temp1!=null && temp2!=null)
         {
-            ListNode node=new ListNode(list.get(i));
+            ListNode node=new ListNode();
+            if(temp1.val<temp2.val)
+            {
+                node.val=temp1.val;
+                curr.next=node;
+                curr=node;
+                temp1=temp1.next;
+            }
+            else
+            {
+                node.val=temp2.val;
+                curr.next=node;
+                curr=node;
+                temp2=temp2.next;
+            }
+            
+        }
+        while(temp1!=null)
+        {
+            ListNode node=new ListNode();
+            node.val=temp1.val;
             curr.next=node;
             curr=node;
-        }
+            temp1=temp1.next;
 
+        }
+        while(temp2!=null)
+        {
+            ListNode node=new ListNode();
+            node.val=temp2.val;
+            curr.next=node;
+            curr=node;
+            temp2=temp2.next;
+
+        }
+       
         return dummy.next;
 
         
