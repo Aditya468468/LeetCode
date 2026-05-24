@@ -1,29 +1,28 @@
 class Solution {
     public int[] limitOccurrences(int[] nums, int k) 
     {
-        int n=nums.length;
-        int prev=nums[0];
-        int idx=1;
-        int cnt=1;
-        for(int i=1;i<n;i++)
+        int idx=0;
+        int prev=-1;
+        int cnt=0;
+        for(int i=0;i<nums.length;i++)
         {
-            if(nums[i]!=prev)
-            {
-                cnt=1;
-                prev=nums[i];
-            }
-            else 
+            if(nums[i]==prev)
             {
                 cnt++;
+            }
+            else if(nums[i]!=prev)
+            {
+                prev=nums[i];
+                cnt=1;
             }
             if(cnt<=k)
             {
                 nums[idx++]=nums[i];
-            }
-        }
 
-        return Arrays.copyOf(nums, idx);
-        
-        
+            }
+        }  
+
+        return Arrays.copyOf(nums,idx);
+
     }
 }
