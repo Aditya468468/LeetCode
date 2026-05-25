@@ -1,8 +1,13 @@
 class Solution {
     public String convert(String s, int numRows) 
     {
+        /*
+                |    /|    /|    /|
+                |  /  |  /  |  /  |
+                |/    |/    |/    |
+        */
         int n=s.length();
-        if(numRows<=1 || n<=1) return s; //Asked GPT
+        if(numRows<=1 || n<=1) return s; //Asked GPT this Edge Case.
         char[][] grid=new char[numRows][2*(n-1)];
         char []nums=s.toCharArray();
         boolean down=true;
