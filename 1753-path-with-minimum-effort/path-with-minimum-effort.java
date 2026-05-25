@@ -18,8 +18,24 @@ class Solution {
     {
         int n=heights.length;
         int m=heights[0].length;
+        if(n==1 && m==1) // Single Cell 
+        {
+            return 0;
+        }
         // int low=Math.min(Math.abs(heights[0][0]-heights[1][0]),Math.abs(heights[0][0]-heights[0][1]));
         int low=0;
+        if(n>1 && m>1) 
+        {
+            low=Math.min(Math.abs(heights[0][0]-heights[1][0]),Math.abs(heights[0][0]-heights[0][1]));
+        }
+        else if(n>1)
+        {
+            low=Math.abs(heights[0][0]-heights[1][0]);
+        }
+        else
+        {
+            low=Math.abs(heights[0][0]-heights[0][1]);
+        }
         int max=Integer.MIN_VALUE;
         int min=Integer.MAX_VALUE;
         for(int i=0;i<n;i++)
