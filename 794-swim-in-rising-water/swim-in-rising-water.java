@@ -24,6 +24,8 @@ class Solution {
         if(canReach(grid,i,j+1,visited,k)) return true;
         if(canReach(grid,i,j-1,visited,k)) return true;
 
+       // visited[i][j]=false;
+
 
         return false;
     
