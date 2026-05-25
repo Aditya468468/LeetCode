@@ -32,7 +32,9 @@ class Solution {
     {
         int n=grid.length;
         int m=grid[0].length;
-        int low=0;
+       // int low=0;
+        int low=Math.max(grid[0][0],grid[n-1][m-1]);
+        //You MUST at least wait for start/end cells->GPT
         int high=Integer.MIN_VALUE;
         for(int i=0;i<grid.length;i++)
         {
