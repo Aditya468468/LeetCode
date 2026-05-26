@@ -1,20 +1,31 @@
 class Solution {
     public boolean asteroidsDestroyed(int mass, int[] asteroids) 
     {
-       Arrays.sort(asteroids);
-       
-        long total=(long)mass;
+        int min=Integer.MAX_VALUE;
+        int max=Integer.MIN_VALUE;
+        for(int x:asteroids)
+        {
+            if(x<min) min=x;
+            if(x>max) max=x;
+        }
+        int[]freq=new int[max+1];
         for(int i=0;i<asteroids.length;i++)
         {
-            long m=(long)asteroids[i];
-            if(total>=m)
+            freq[asteroids[i]]++;
+        }
+        long totalMass=mass;
+        long sum=0;
+        for(int i=min;i<=max;i++)
+        {
+            if(freq[i]!=0)
             {
-                total+=m;
+                if(i>totalMass)
+                {
+                    return false;
+                }
+                totalMass+=(long)i*freq[i];
             }
-            else
-            {
-                return false;
-            }
+            
         }
 
 
