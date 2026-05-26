@@ -15,19 +15,22 @@ class Solution {
         }
         long totalMass=mass;
         long sum=0;
-        for(int i=min;i<=max;i++)
+        int i=min;
+        while(i<=max)
         {
-            if(freq[i]!=0)
+            if(freq[i]!=0) // If that Asteroid exists.
             {
                 if(i>totalMass)
                 {
-                    return false;
+                    if(sum==0) return false; //No Prior asteroids to added up.
+                    totalMass+=sum;
+                    sum=0;
+                    continue;
                 }
-                totalMass+=(long)i*freq[i]; //Break all the units of It.
+                sum+=(long)i*freq[i];
             }
-            
+            i++;
         }
-
 
         return true;
         
