@@ -23,7 +23,7 @@ class Solution {
                 {
                     return false;
                 }
-                totalMass+=(long)i*freq[i];
+                totalMass+=(long)i*freq[i]; //Break all the units of It.
             }
             
         }
