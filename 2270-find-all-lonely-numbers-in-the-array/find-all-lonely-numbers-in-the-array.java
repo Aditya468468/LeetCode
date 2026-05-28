@@ -13,12 +13,11 @@ class Solution {
             int x=nums[i];
             int y=x-1;
             int z=x+1;
-            if(map.containsKey(x) && !map.containsKey(y) && !map.containsKey(z))
+            if(map.containsKey(x) &&map.get(x)==1 && !map.containsKey(y) && !map.containsKey(z))
             {
-                if(map.get(x)==1)
-                {
+                
                     list.add(x);
-                }
+                
             }
         }
 
