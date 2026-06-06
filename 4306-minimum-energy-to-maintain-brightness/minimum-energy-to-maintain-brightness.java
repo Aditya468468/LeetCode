@@ -33,14 +33,14 @@ class Solution {
 
         //Now lets See, Total Num of Bulbs needed to get brightness
         int total=0;
-        int needed=(brightness+2)/3;
+        int needed=(brightness+2)/3; //Ceil Value.
         if(n%3==0)
         {
             total=n/3;
         }
         else
         {
-            total=n/3 + 1;
+            total=n/3+1;
         } //Total illumination-> Turning all On using Min Bulds.
         if(needed>total) return -1;
         if(needed<total) total=needed; //Buld needed.
