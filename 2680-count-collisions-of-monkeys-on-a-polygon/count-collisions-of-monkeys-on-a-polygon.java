@@ -1,19 +1,23 @@
-class Solution {
-
-   long MOD=1_000_000_007;
-
-    private long moves(long x,long n)
+class Solution 
+{
+    static int MOD=1_000_000_007;
+    private long pow(long n,long x)
     {
-        if(n==0) return 1;
-        if(n%2==0) return moves((x*x)%MOD,n/2)%MOD;
-        else return (x*moves(x,n-1))%MOD;
+        if(x==0) return 1;
+        if(x==1) return n;
+        if(x%2==0)
+        {
+            return pow((n*n)%MOD,x/2)%MOD;
+        }
+        else 
+        {
+            return n*pow((n*n)%MOD,x/2)%MOD;
+        }
+
     }
     public int monkeyMove(int n) 
     {
-    
-        //return (int)(moves(2,n)-2);
-        return (int)((moves(2,n)-2+MOD)%MOD);
-        
-        
+        int MOD=1_000_000_007;
+        return (int)(pow(2L,n)-2+MOD)%MOD;
     }
 }
