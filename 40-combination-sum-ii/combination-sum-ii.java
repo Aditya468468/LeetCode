@@ -1,34 +1,34 @@
-class Solution {
-    public void comb(int idx,int[]nums,List<List<Integer>> ans,List<Integer> list,int target)
+class Solution 
+{
+    private void generate(int idx,int[]nums, int target,List<Integer>list,List<List<Integer>> ans)
     {
         if(target==0)
         {
             ans.add(new ArrayList<>(list));
             return;
         }
-        if(target<0 || idx==nums.length)
+        if(target<0 || idx==nums.length) return;
+        //Lets Pick it.
+        list.add(nums[idx]);
+        generate(idx+1,nums,target-nums[idx],list,ans);
+        list.remove(list.size()-1);
+        //Skip,But Skip all its Occ at that level.
+        while(idx<nums.length-1 && nums[idx+1]==nums[idx])
         {
-            return;
+            idx++; // Skips.
         }
-        for(int i=idx;i<nums.length;i++)
-        {
-            if(i>idx && nums[i]==nums[i-1]) continue;
-            if(nums[i]>target) break; //Pruning!!
-            list.add(nums[i]);
-            comb(i+1,nums,ans,list,target-nums[i]);
-            list.remove(list.size()-1);
-
-        }
-       
+        generate(idx+1,nums,target,list,ans);
 
     }
     public List<List<Integer>> combinationSum2(int[] candidates, int target) 
     {
         Arrays.sort(candidates);
         List<List<Integer>> ans=new ArrayList<>();
-        comb(0,candidates,ans,new ArrayList<>(),target);
+        generate(0,candidates,target,new ArrayList<>(),ans);
+
 
         return ans;
-       
+
+        
     }
 }
