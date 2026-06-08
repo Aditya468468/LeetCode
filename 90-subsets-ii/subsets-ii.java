@@ -2,21 +2,19 @@ class Solution
 {
     private void generate(int idx,int[]nums,List<Integer> list,List<List<Integer>> ans)
     {
-        if(idx==nums.length)
+        //Every state is an Ans.
+        ans.add(new ArrayList<>(list));
+
+        for(int i=idx;i<nums.length;i++)
         {
-            ans.add(new ArrayList<>(list));
-            return;
+            if(i>idx && nums[i-1]==nums[i])
+            {
+                continue;
+            }
+            list.add(nums[i]);
+            generate(i+1,nums,list,ans);
+            list.remove(list.size()-1);
         }
-        // Take it.
-        list.add(nums[idx]);
-        generate(idx+1,nums,list,ans);
-        list.remove(list.size()-1);
-        //Not Take it, So We wont take Any occ at that level.
-        while(idx<nums.length-1 && nums[idx]==nums[idx+1])
-        {
-            idx++;
-        }
-        generate(idx+1,nums,list,ans);
 
     }
     public List<List<Integer>> subsetsWithDup(int[] nums) 
