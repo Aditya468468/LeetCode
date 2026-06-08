@@ -7,12 +7,13 @@ class Solution
             ans.add(new ArrayList<>(list));
             return;
         }
-        for(int i=idx;i<=n;i++)
-        {
-            list.add(i);
-            generate(i+1,n,k,ans,list);
-            list.remove(list.size()-1);
-        }
+        if(idx>n) return;
+        //Pick That idx
+        list.add(idx);
+        generate(idx+1,n,k,ans,list);
+        list.remove(list.size()-1); //Backtrack/Undoæ
+        //Dont Take.
+        generate(idx+1,n,k,ans,list);
     }
     public List<List<Integer>> combine(int n, int k) 
     {
