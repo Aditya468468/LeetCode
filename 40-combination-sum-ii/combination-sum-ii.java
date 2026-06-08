@@ -8,16 +8,17 @@ class Solution
             return;
         }
         if(target<0 || idx==nums.length) return;
-        //Lets Pick it.
-        list.add(nums[idx]);
-        generate(idx+1,nums,target-nums[idx],list,ans);
-        list.remove(list.size()-1);
-        //Skip,But Skip all its Occ at that level.
-        while(idx<nums.length-1 && nums[idx+1]==nums[idx])
+      
+        for(int i=idx;i<nums.length;i++)
         {
-            idx++; // Skips.
+            if(i>idx && nums[i-1]==nums[i])
+            {
+                continue;
+            }
+            list.add(nums[i]);
+            generate(i+1,nums,target-nums[i],list,ans);
+            list.remove(list.size()-1);
         }
-        generate(idx+1,nums,target,list,ans);
 
     }
     public List<List<Integer>> combinationSum2(int[] candidates, int target) 
