@@ -1,28 +1,29 @@
 class Solution 
 {
-    public void comb(int idx,List<List<Integer>> ans,List<Integer> list,int k,int sum)
+    public void comb(int idx,int k,int target,List<Integer> list,List<List<Integer>> ans)
     {
-        if(sum==0 && list.size()==k)
+        if(list.size()==k && target==0)
         {
             ans.add(new ArrayList<>(list));
             return;
         }
-        if(sum<=0 || list.size()>k || idx>9) return;
-        //For-loop recursion 
-        for(int i=idx;i<=9;i++)
+        if(target<0 || idx>9) return;
+        for(int i=idx;i<10;i++)
         {
-            if(i>sum) break;
             list.add(i);
-            comb(i+1,ans,list,k,sum-i);
+            comb(i+1,k,target-i,list,ans);
             list.remove(list.size()-1);
         }
+
     }
     public List<List<Integer>> combinationSum3(int k, int n) 
     {
-
         List<List<Integer>> ans=new ArrayList<>();
-        comb(1,ans,new ArrayList<>(),k,n);;
+        comb(1,k,n,new ArrayList<>(),ans);
 
         return ans;
+
+
+        
     }
 }
