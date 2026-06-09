@@ -7,6 +7,7 @@ class Solution
             ans.add(new ArrayList<>(list));
             return;
         }
+        if(list.size()==k) return;
         if(target<0 || idx>9) return;
         for(int i=idx;i<10;i++)
         {
