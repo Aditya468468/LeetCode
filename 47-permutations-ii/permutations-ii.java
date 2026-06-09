@@ -1,33 +1,38 @@
+
 class Solution 
 {
-    private void perm(int[]nums,boolean []used,List<List<Integer>> ans,List<Integer> list)
+    private void perm(int[]nums,boolean[]used,List<Integer> list,List<List<Integer>> ans)
     {
         if(list.size()==nums.length)
         {
             ans.add(new ArrayList<>(list));
             return;
         }
-        //Lets Explore.
         for(int i=0;i<nums.length;i++)
         {
-            if(used[i]==true) continue;
-            if(i>0 && nums[i-1]==nums[i] && !used[i-1]) continue;
+            if(used[i]) continue; //If the element has be used in parent trees,we cant use it.
+            if(i>0 && nums[i-1]==nums[i] && !used[i-1])
+            {
+                continue;
+            }
+            if(used[i]) continue; //If the element has be used in parent trees,we cant use it.
+            //mark
             used[i]=true;
             list.add(nums[i]);
-            perm(nums,used,ans,list);
+            perm(nums,used,list,ans);
+            //Back-track.
             list.remove(list.size()-1);
             used[i]=false;
-
         }
+
     }
     public List<List<Integer>> permuteUnique(int[] nums) 
     {
         Arrays.sort(nums);
         List<List<Integer>> ans=new ArrayList<>();
-        perm(nums,new boolean[nums.length],ans,new ArrayList<>());
+        perm(nums,new boolean[nums.length],new ArrayList<>(),ans);
 
         return ans;
-
         
     }
 }
