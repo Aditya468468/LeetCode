@@ -1,32 +1,27 @@
-class Solution {
-    private boolean search(int idx,char[][]board,int i,int j,String word)
+class Solution 
+{
+    public boolean search(int idx,String word,char[][]board,int i,int j, boolean[][]visited)
     {
-        if(board[i][j]!=word.charAt(idx) || board[i][j]=='#') return false;
+        int n=board.length;
+        int m=board[0].length;
+        if(i<0 || i>=n || j<0 || j>=m) return false;
+        if(visited[i][j]==true || board[i][j]!=word.charAt(idx)) return false;
         if(idx==word.length()-1)
         {
             return true;
         }
-        //if(board[i][j]!=word.charAt(idx) || board[i][j]=='#') return false;
-        //Lets take calls to 4-direction.
-        int n=board.length;
-        int m=board[0].length;
-        char temp=board[i][j];
-        board[i][j]='#'; // used.
-        boolean ans=false;
-        //top
-        boolean top;
-        if(i-1>=0) top=search(idx+1,board,i-1,j,word); else top=false;
-        boolean down;
-        if(i+1<n) down=search(idx+1,board,i+1,j,word); else down=false;
-        boolean left;
-        if(j-1>=0) left=search(idx+1,board,i,j-1,word); else left=false;
-        boolean right;
-        if(j+1<m) right=search(idx+1,board,i,j+1,word); else right=false;
 
-        ans=(top || down || left || right);
-        board[i][j]=temp; //back-track;
+        visited[i][j]=true;
 
-        return ans;
+        if(j-1>=0) if(search(idx+1,word,board,i,j-1,visited)) return true;
+        if(j+1<m)  if (search(idx+1,word,board,i,j+1,visited)) return true;
+        if(i-1>=0) if(search(idx+1,word,board,i-1,j,visited)) return true;
+        if(i+1<n)  if(search(idx+1,word,board,i+1,j,visited)) return true;
+        //Backtrack.
+        visited[i][j]=false;
+
+        return false;
+
 
 
     }
@@ -34,18 +29,14 @@ class Solution {
     {
         int n=board.length;
         int m=board[0].length;
-        for(int i=0;i<n;i++)
+       for(int i=0;i<n;i++)
+       {
+        for(int j=0;j<m;j++)
         {
-            for(int j=0;j<m;j++)
-            {
-                if(board[i][j]==word.charAt(0))
-                {
-                    if(search(0,board,i,j,word)) return true;
-                }
-            }
-        }
+            if(search(0,word,board,i,j,new boolean[n][m])) return true;
 
+        }
+        }
         return false;
-        
     }
 }
