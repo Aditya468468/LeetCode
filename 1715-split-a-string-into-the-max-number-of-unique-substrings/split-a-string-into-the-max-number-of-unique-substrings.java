@@ -1,39 +1,38 @@
 class Solution 
 {
-    int max=0; //global 
-
-    private boolean isValid(String s,HashSet<String> set)
+    int max=0;
+    public boolean isValid(String str,HashSet<String> set)
     {
-        if(set.contains(s)) return false;
+        if(set.contains(str)) return false;
         return true;
     }
-    private void generate(int idx,String s,int count,HashSet<String> set)
+    public void split(int idx,String s,HashSet<String> set,int cnt)
     {
         if(idx==s.length())
         {
-            if(count>max)
+            if(max<cnt)
             {
-                max=count;
+                max=cnt;
             }
             return;
         }
         for(int i=idx;i<s.length();i++)
         {
-            String sub=s.substring(idx,i+1);
-            if(isValid(sub,set))
+            String str=s.substring(idx,i+1);
+            if(isValid(str,set))
             {
-                set.add(sub);
-                generate(i+1,s,count+1,set);
-                set.remove(sub); //back-track.
+                set.add(str);
+                split(i+1,s,set,cnt+1);
+                set.remove(str);//Back-track.
             }
         }
     }
     public int maxUniqueSplit(String s) 
     {
-        generate(0,s,0,new HashSet<>());
+      
+        split(0,s,new HashSet<>(),0);
 
         return max;
-
         
     }
 }
