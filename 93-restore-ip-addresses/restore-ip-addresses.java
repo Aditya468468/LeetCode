@@ -1,41 +1,57 @@
 class Solution 
 {
+    private int toNumber(String s)
+    {
+        int num=0;
+        for(int i=0;i<s.length();i++)
+        {
+            num=(num*10)+(s.charAt(i)-'0');
+        }
+
+        return num;
+    }
     private boolean isValid(String s)
     {
-        if (s.length()>3) return false;
-        int val=Integer.parseInt(s);
-        if (val>255) return false;
-        // if len is 2 or 3..it should not have leading zero.
-        if(s.length()>1 && s.charAt(0)=='0') return false;
+        if(s.length()>1 && s.charAt(0)=='0')// Leading Zero Check
+        {
+            return false;
+        }
+        int value=toNumber(s);
+        if(value<0 || value>255) return false; //Range Check
+
         return true;
     }
-    private void restore(int idx,String s,int parts,List<String> ans,StringBuilder str)
+    public void generate(int idx,String s,StringBuilder str,List<String> ans,int part)
     {
-        if(idx==s.length() && parts==4)
+        if(idx==s.length())
         {
-            ans.add(new String(str.toString()));
+            if(part==4)
+            {
+                ans.add(new StringBuilder(str).toString());
+            }
             return;
         }
-        if(parts>=4 || idx==s.length()) return;
-        // For-Loop
+        if(part>=4) return; // No further Splits are needed.
         for(int i=idx;i<s.length();i++)
         {
-            String sub=s.substring(idx,i+1);
-            if(isValid(sub))
+            String temp=s.substring(idx,i+1);
+            if(isValid(temp))
             {
                 int len=str.length();
-                if(parts>0) str.append('.');
-                str.append(sub);
-                restore(i+1,s,parts+1,ans,str);
-                str.delete(len, str.length()); //took help
+                str.append(temp);
+                if(part!=3) str.append('.');
+                generate(i+1,s,str,ans,part+1);
+                //str.delete(idx,i+1);
+                str.setLength(len);
             }
         }
     }
     public List<String> restoreIpAddresses(String s) 
     {
         List<String> ans=new ArrayList<>();
-        restore(0,s,0,ans,new StringBuilder());
+        generate(0,s,new StringBuilder(),ans,0);
         return ans;
-        
+
+
     }
 }
