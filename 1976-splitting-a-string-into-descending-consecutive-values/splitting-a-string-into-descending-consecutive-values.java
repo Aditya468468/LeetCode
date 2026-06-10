@@ -19,14 +19,6 @@ class Solution
         return num;
 
     }
-    public boolean canSplit(String str,long prevd)
-    {
-        if(prevd==-1) return true; // First split
-        long num=toNumber(str);
-        if(prevd-num==1) return true;
-        return false;
-
-    }
     public boolean check(int idx,String s, long prevd,int cnt)
     {
         if(idx==s.length())
@@ -36,15 +28,16 @@ class Solution
         for(int i=idx;i<s.length();i++)
         {
             String str=s.substring(idx,i+1);
-            if(canSplit(str,prevd))
+            long num=toNumber(str);
+            if(prevd-num==1 || prevd==-1)
             {
-                 if(check(i+1,s,toNumber(str),cnt+1))
-                 {
+                if(check(i+1,s,num,cnt+1))
+                {
                     return true;
-                 }
+                }
             }
         }
-
+        
         return false;
     }
     public boolean splitString(String s) 
