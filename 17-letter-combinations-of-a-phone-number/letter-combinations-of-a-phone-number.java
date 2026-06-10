@@ -1,7 +1,7 @@
 class Solution 
 {
     static Map<Character,String> map=new HashMap<>();
-    static 
+    static
     {
         map.put('1',"");
         map.put('2',"abc");
@@ -13,30 +13,28 @@ class Solution
         map.put('8',"tuv");
         map.put('9',"wxyz");
     }
-
-    private void comb(int idx,String digits,List<String> ans,StringBuilder str)
+    private void generate(int idx,String digits,StringBuilder str,List<String> ans)
     {
-        if(str.length()==digits.length())
+        if(idx==digits.length())
         {
-            ans.add(new String(str.toString()));
+            ans.add(new StringBuilder(str).toString());
             return;
         }
-        String curr=map.get(digits.charAt(idx));
-        for(int i=0;i<curr.length();i++)
+        String s=map.get(digits.charAt(idx));
+        for(int i=0;i<s.length();i++)
         {
-            str.append(curr.charAt(i));
-            comb(idx+1,digits,ans,str);
+            str.append(s.charAt(i));
+            generate(idx+1,digits,str,ans);
             str.deleteCharAt(str.length()-1);
         }
-    }
 
+    }
     public List<String> letterCombinations(String digits) 
     {
         List<String> ans=new ArrayList<>();
-        comb(0,digits,ans,new StringBuilder());
+        generate(0,digits,new StringBuilder(),ans);
 
         return ans;
-
-        
+       
     }
 }
