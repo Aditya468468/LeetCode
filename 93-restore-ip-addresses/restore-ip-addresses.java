@@ -34,8 +34,8 @@ class Solution
         if(part>=4) return; // No further Splits are needed.
         int needed=4-part;
         int canBe=s.substring(idx).length();
-        if(canBe<needed) return;
-        for(int i=idx;i<s.length();i++)
+        if(canBe<needed) return; //Pruning
+        for(int i=idx;i<Math.min(idx+3,s.length());i++)
         {
             String temp=s.substring(idx,i+1);
             if(isValid(temp))
