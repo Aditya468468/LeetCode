@@ -10,11 +10,11 @@ class Solution
             if(board[i][y]=='Q') return false;
         }
         //Col.
-        for(int i=0;i<m;i++)
-        {
-            if(i==y) continue;
-            if(board[x][i]=='Q') return false;
-        }
+        // for(int i=0;i<m;i++)
+        // {
+        //     if(i==y) continue;
+        //     if(board[x][i]=='Q') return false;
+        // }
         int r=x-1;
         int c=y-1;
         //Anti
