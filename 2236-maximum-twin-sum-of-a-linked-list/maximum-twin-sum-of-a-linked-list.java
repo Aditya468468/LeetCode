@@ -8,24 +8,49 @@
  *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
  * }
  */
-class Solution {
+class Solution 
+{
+    private ListNode middleOfLL(ListNode head)
+    {
+        ListNode slow=head;
+        ListNode fast=head;
+        while(fast!=null && fast.next!=null)
+        {
+            fast=fast.next.next;
+            slow=slow.next;
+        }
+
+        return slow;
+    }
+    private ListNode reverse(ListNode head,ListNode middle)
+    {
+        ListNode temp=head;
+        ListNode prev=null;
+        while(temp!=middle)
+        {
+            ListNode nextNode=temp.next;
+            temp.next=prev;
+            prev=temp;
+            temp=nextNode;
+        }
+        return prev;
+    }
+
     public int pairSum(ListNode head) 
     {
-        ArrayList<Integer> list = new ArrayList<>();
-        while(head!=null)
-        {
-            list.add(head.val);
-            head=head.next;
-        }
+
+        if(head==null) return 0;
+        if(head.next==null) return head.val;
+
+        ListNode middle=middleOfLL(head);
+        ListNode left= reverse(head,middle);
         int maxSum=0;
-        int i=0;
-        int j=list.size()-1;
-        while(i<j)
+        while(left!=null && middle!=null)
         {
-            int sum=list.get(i)+list.get(j);
-            maxSum=Math.max(maxSum,sum);
-            i++;
-            j--;
+            int sum=left.val+middle.val;
+            maxSum=Math.max(sum,maxSum);
+            left=left.next;
+            middle=middle.next;
         }
 
         return maxSum;
