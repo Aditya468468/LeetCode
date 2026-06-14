@@ -22,11 +22,11 @@ class Solution
 
         return slow;
     }
-    private ListNode reverse(ListNode head,ListNode middle)
+    private ListNode reverse(ListNode head)
     {
         ListNode temp=head;
         ListNode prev=null;
-        while(temp!=middle)
+        while(temp!=null)
         {
             ListNode nextNode=temp.next;
             temp.next=prev;
@@ -43,14 +43,14 @@ class Solution
         if(head.next==null) return head.val;
 
         ListNode middle=middleOfLL(head);
-        ListNode left= reverse(head,middle);
+        ListNode secondHalf= reverse(middle);
         int maxSum=0;
-        while(left!=null && middle!=null)
+        while(head!=null && secondHalf!=null)
         {
-            int sum=left.val+middle.val;
+            int sum=head.val+secondHalf.val;
             maxSum=Math.max(sum,maxSum);
-            left=left.next;
-            middle=middle.next;
+            head=head.next;
+            secondHalf=secondHalf.next;
         }
 
         return maxSum;
