@@ -1,83 +1,82 @@
-class Solution {
-
-    public boolean isPossible(int row,int col,List<StringBuilder> board)
+class Solution 
+{
+    private boolean isPossible(char [][]board,int x,int y)
     {
-        int r=row;
-        int c=col;
-        //top
-        while(r>=0)
+        //Col.
+        int m=board.length;
+        int n=m;
+        for(int i=x-1;i>=0;i--)
         {
-            if(board.get(r).charAt(c)=='Q') return false;
-            r--;
+            if(board[i][y]=='Q') return false;
         }
-        r=row;
-        c=col;
-        //left
+        //Col.
+        for(int i=0;i<m;i++)
+        {
+            if(i==y) continue;
+            if(board[x][i]=='Q') return false;
+        }
+        int r=x-1;
+        int c=y-1;
+        //Anti
         while(r>=0 && c>=0)
         {
-            if(board.get(r).charAt(c)=='Q') return false;
-            r--;
+            if(board[r][c]=='Q') return false;
             c--;
-        }
-        //right
-        r=row;
-        c=col;
-         while(r>=0 && c<board.get(r).length())
-        {
-            if(board.get(r).charAt(c)=='Q') return false;
             r--;
+        }
+         r=x-1;
+         c=y+1;
+        // Diag
+        while(r>=0 && c<m)
+        {
+            if(board[r][c]=='Q') return false;
             c++;
+            r--;
         }
 
         return true;
-
-
     }
-
-    public void check(int row,List<StringBuilder> board,List<List<String>> ans)
+    public void explore(int row,char[][]board,List<List<String>> ans,List<String> list)
     {
-        if(row==board.size())
+        int n=board.length;
+        if(list.size()==board.length)
         {
-            List<String> temp = new ArrayList<>();
-            for (StringBuilder sb : board) 
-            {
-                temp.add(sb.toString());
-            }
-            ans.add(new ArrayList<>(temp));
+            ans.add(new ArrayList<>(list));
             return;
         }
-        for(int col=0;col<board.size();col++)
+        if(row>=n) return; // row-Boundary.
+        for(int i=0;i<n;i++) //Loop will ensure col Boundary
         {
-            if(isPossible(row,col,board))
+            if(isPossible(board,row,i))
             {
-                board.get(row).setCharAt(col,'Q');
-                check(row+1,board,ans);
-                board.get(row).setCharAt(col,'.'); //backtrack
-
+                board[row][i]='Q';
+                StringBuilder str=new StringBuilder();
+                for(int j=0;j<n;j++)
+                {
+                    if(j==i) str.append('Q');
+                    else str.append('.');
+                }
+                list.add(str.toString());
+                explore(row+1,board,ans,list);
+                list.remove(list.size()-1);
+                board[row][i]='.';
             }
         }
     }
     public List<List<String>> solveNQueens(int n) 
     {
-        List<StringBuilder> board=new ArrayList<>();
-
-        //Fill board
+        char[][] board=new char[n][n];
         for(int i=0;i<n;i++)
         {
-            StringBuilder str=new StringBuilder();
             for(int j=0;j<n;j++)
             {
-                str.append('.');
+                board[i][j]='.';
             }
-            board.add(str);
-        }
+        } // board is ready.
         List<List<String>> ans=new ArrayList<>();
-        check(0,board,ans);
-       
+        explore(0,board,ans,new ArrayList<>());
         
         return ans;
-
         
-    
     }
 }
