@@ -45,8 +45,8 @@ class Solution {
             ------------------------------------------------------------------
             '#'-> In normal ops,its work is to Duplicate the String with itself only,
             ,Soo the char will exits in l/2 part also, abcdabcd, k=7, len=8
-            --> ans='d'.--> newLen=len/2==4,now track from where k is from back in the oldLen (==8)--> oldLen%k== 8%7=1->(lets say x=1), now new_K=newLen-x
-            --> 4-1= 3.. 3rd idx--> abcd, 3th idx-> ans='d'.
+            --> ans='d'.--> newLen=len/2==4,now track from where k is from back in the oldLen, abcd|abcd-> 0<->4,1<->5,2<->6,3<->7,
+            k=k%newLen--> k=7%4==3 (newLen=len/2)
             ---------------------------------------------------------------------
             */
             len=nums[n-1];
@@ -59,9 +59,9 @@ class Solution {
                 }
                 else if(ch=='#')
                 {
-                    long half=len/2;
-                    k%=half;
-                    len=half;
+                    long newLen=len/2;
+                    k=k%newLen;
+                    len=newLen;
                 }
                 else if(ch=='*')
                 {
