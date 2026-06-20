@@ -18,6 +18,8 @@ class Solution {
         ListNode curr=head;
         while(curr!=null)
         {
+            ListNode nextNode=curr.next;
+            curr.next=null;//isolate the Node
             if(curr.val<x)
             {
                 smaller.next=curr;
@@ -28,7 +30,7 @@ class Solution {
                 greater.next=curr;
                 greater=greater.next;
             }
-            curr=curr.next;
+            curr=nextNode;
         }
       
         if(dummySmaller.next==null)
