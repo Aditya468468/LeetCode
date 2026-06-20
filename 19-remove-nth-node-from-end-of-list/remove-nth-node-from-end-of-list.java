@@ -9,45 +9,32 @@
  * }
  */
 class Solution {
-    private int lengthOfLL(ListNode head)
-    {
-        ListNode temp=head;
-        int len=0;
-        while(temp!=null)
-        {
-            len++;
-            temp=temp.next;
-        }
-
-        return len;
-    }
     public ListNode removeNthFromEnd(ListNode head, int n) 
     {
-        if(head==null) return null;
-        int len=lengthOfLL(head);
-        if(n==len) //head deletion.
+        //Gap Method Using Fast And Slow Pointer.
+        // We Maintain a Gap of N btw two pointers
+
+        ListNode fast=head;
+        for(int i=0;i<n;i++) // Actually our Constraints says that n will be btw Len
+        {
+            fast=fast.next;
+        }
+        if(fast==null)
         {
             return head.next;
         }
-        int k=(len-n);
-        if(k<0) return head;
-        ListNode curr=head;
-        int cnt=1;
-        while(curr!=null && cnt!=k)
+        ListNode slow=head;
+        while(fast.next!=null)
         {
-            curr=curr.next;
-            cnt++;
+            slow=slow.next;
+            fast=fast.next;
         }
-        if(curr.next.next==null)
-        {
-            curr.next=null;
-            return head;
-        }
-        ListNode nextNode=curr.next;
-        curr.next=curr.next.next;
+        ListNode nextNode =slow.next;
+        slow.next=slow.next.next;
         nextNode.next=null;
 
         return head;
+
 
         
     }
