@@ -12,40 +12,38 @@ class Solution {
     public ListNode deleteDuplicates(ListNode head) 
     {
         if(head==null || head.next==null) return head;
-        
-        while(head!=null && head.next!=null && head.val==head.next.val)
+        ListNode dummy=new ListNode(-1);
+        ListNode curr=dummy;
+        //if curr.next.val=curr.val.-> delete it.
+        ListNode temp=head;
+        while(temp!=null && temp.next!=null)
         {
-            int d=head.val;
-            while(head!=null && head.val==d)
+            if(temp.val!=temp.next.val)
             {
-                head=head.next;
-            }
-           
-        }
-        if(head==null) return null;
-        ListNode prev=head;
-        ListNode curr=head.next;
-        while(curr!=null && curr.next!=null)
-        {
-            
-            if(curr.val==curr.next.val)
-            {
-                int data=curr.val;
-                while(curr!=null && curr.val==data)
-                {
-                    curr=curr.next;
-                }
-                prev.next=curr;
-
+                curr.next=temp;
+                curr=temp;
+                 temp=temp.next;
             }
             else
             {
-                prev=curr;
-                curr=curr.next;
+                int x=temp.val;
+                while(temp!=null && temp.val==x)
+                {
+                    temp=temp.next;
+                }
+
             }
+        
+        }
+        if(temp!=null)
+        {
+            curr.next=temp; // Last Node is Unique.
+        }
+        else
+        {
+            curr.next=null; // Removing Older Connections.
         }
 
-        return head;
-        
+        return dummy.next;
     }
 }
