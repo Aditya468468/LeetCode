@@ -9,49 +9,46 @@
  * }
  */
 class Solution {
-    private int length(ListNode head)
+    private int lengthOfLL(ListNode head)
     {
-        int len=0;
-        if(head==null)
-        {
-            return len;
-        }
         ListNode temp=head;
+        int len=0;
         while(temp!=null)
         {
             len++;
             temp=temp.next;
         }
+
         return len;
     }
     public ListNode removeNthFromEnd(ListNode head, int n) 
     {
-        int len=length(head);
-        if(n==len) 
+        if(head==null) return null;
+        int len=lengthOfLL(head);
+        if(n==len) //head deletion.
         {
             return head.next;
         }
-        int req=(len-n);
-        if(req<0) return head;
+        int k=(len-n);
+        if(k<0) return head;
+        ListNode curr=head;
         int cnt=1;
-        ListNode temp=head;
-        while(req!=cnt)
+        while(curr!=null && cnt!=k)
         {
+            curr=curr.next;
             cnt++;
-            temp=temp.next;
         }
-        ListNode k=temp.next;
-        if(k==null)
+        if(curr.next.next==null)
         {
-            temp.next=null; // last Node
+            curr.next=null;
             return head;
         }
-        temp.next=k.next;
-        k.next=null;
+        ListNode nextNode=curr.next;
+        curr.next=curr.next.next;
+        nextNode.next=null;
 
         return head;
-        
-        
+
         
     }
 }
