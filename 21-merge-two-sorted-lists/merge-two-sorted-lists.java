@@ -11,41 +11,34 @@
 class Solution {
     public ListNode mergeTwoLists(ListNode list1, ListNode list2) 
     {
-        //Optimal
-        ListNode dummy=new ListNode(-1);
-        ListNode curr=dummy;
-        ListNode temp1=list1;
-        ListNode temp2=list2;
-        while(temp1!=null && temp2!=null)
+        ListNode dummyNode=new ListNode(-1);
+        ListNode curr=dummyNode;
+        while(list1!=null && list2!=null)
         {
-            if(temp1.val<temp2.val)
+        
+            if(list1.val>=list2.val)
             {
-               
-                curr.next=temp1;
-                curr=temp1;
-                temp1=temp1.next;
+                curr.next=list2;
+                list2=list2.next;
+                curr=curr.next;
             }
-            else
+            else 
             {
-
-                curr.next=temp2;
-                curr=temp2;
-                temp2=temp2.next;
+                curr.next=list1;
+                list1=list1.next;
+                curr=curr.next;
             }
-            
         }
-        //we can directly link it,because remaining part is already sorted chain
-        if(temp1==null)
+        if(list1==null)
         {
-            curr.next=temp2;
+            curr.next=list2;
         }
         else
         {
-            curr.next=temp1;
+            curr.next=list1;
         }
-       
-        return dummy.next;
 
-        
+        return dummyNode.next;
+
     }
 }
