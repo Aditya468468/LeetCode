@@ -23,22 +23,18 @@ class ListNode {
 class Solution {
     public ListNode reverseList(ListNode head) 
     {
-        if(head==null || head.next==null)
-        {
-            return head;
-        }
+        if(head==null || head.next==null) return head;
+        ListNode curr=head;
         ListNode prev=null;
-        ListNode temp=head;
-        while(temp!=null)
+        while(curr!=null)
         {
-            ListNode front=temp.next;
-            temp.next=prev;
-            prev=temp;
-            temp=front;
+            ListNode nextNode=curr.next;
+            curr.next=prev;
+            prev=curr;
+            curr=nextNode;
         }
-        head=prev;
 
-        return head;
+        return prev;
 
         
     }
