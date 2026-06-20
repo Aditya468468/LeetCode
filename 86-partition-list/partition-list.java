@@ -11,43 +11,35 @@
 class Solution {
     public ListNode partition(ListNode head, int x) 
     {
-        if(head==null)
-        {
-            return null;
-        }
         ListNode dummySmaller=new ListNode(-1);
         ListNode dummyGreater=new ListNode(-1);
         ListNode smaller=dummySmaller;
         ListNode greater=dummyGreater;
-        ListNode temp=head;
-        while(temp!=null)
+        ListNode curr=head;
+        while(curr!=null)
         {
-
-            ListNode nextNode=temp.next;
-            if(temp.val<x)
+            if(curr.val<x)
             {
-                smaller.next=temp;
-                smaller=temp;
-
+                smaller.next=curr;
+                smaller=smaller.next;
             }
             else
             {
-                greater.next=temp;
-                greater=temp;
-
+                greater.next=curr;
+                greater=greater.next;
             }
-            temp.next=null;
-            temp=nextNode;
+            curr=curr.next;
         }
+      
         if(dummySmaller.next==null)
         {
+            greater.next=null;
             return dummyGreater.next;
         }
         smaller.next=dummyGreater.next;
         greater.next=null;
 
         return dummySmaller.next;
-        
         
     }
 }
