@@ -20,7 +20,7 @@ class Solution {
                     // because same heights and widht max has being recorded.as we consider the Min height as our bottleneck.even if we bigger building at one side ans will still be the min, soo we can safely move both
             {
                 i++;
-                j--;
+               // j--;
             }
         }
 
