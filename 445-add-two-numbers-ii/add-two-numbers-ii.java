@@ -10,51 +10,68 @@
  */
 class Solution 
 {
-    private ListNode reverseList(ListNode head)
+    private int length(ListNode head)
     {
-        if(head==null || head.next==null)
-        {
-            return head;
-        }
         ListNode temp=head;
-        ListNode prev=null;
+        int cnt=0;
         while(temp!=null)
         {
-            ListNode nextNode=temp.next;
-            temp.next=prev;
-            prev=temp;
-            temp=nextNode;
+            cnt++;
+            temp=temp.next;
         }
-        return prev;
+        return cnt;
+    }
+    private int add(ListNode l1,ListNode l2)
+    {
+        if(l1==null && l2==null)
+        {
+            return 0;
+        }
+        int carry=add(l1.next,l2.next);
+        int sum=carry+l1.val+l2.val;
+        l1.val=sum%10;
+        return sum/10;
+
+
     }
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) 
     {
-        l1=reverseList(l1);
-        l2=reverseList(l2);
+        int len1=length(l1);
+        int len2=length(l2);
+        int diff=Math.abs(len1-len2);
         ListNode dummy=new ListNode(-1);
         ListNode curr=dummy;
-        int carry=0;
-    
-        while(l1!=null || l2!=null || carry!=0)
+        while(diff!=0)
         {
-            int sum=carry;
-            if(l1!=null) 
-            {
-                sum+=l1.val;
-                l1=l1.next;
-            }
-            if(l2!=null)
-            {
-                sum+=l2.val;
-                l2=l2.next;
-            }
-            ListNode node=new ListNode(sum%10);
+            ListNode node=new ListNode(0);
             curr.next=node;
             curr=node;
-            carry=sum/10;
+            diff--;
+        }
+        //Padding list is available.
+        if(len1>len2)
+        {
+            curr.next=l2;
+            l2=dummy.next;
+        }
+        else if(len2>len1)
+        {
+            curr.next=l1;
+            l1=dummy.next;
+        }
+        // 7->2->4->3
+        // 0->5->6->4
+        int carry=add(l1,l2);
+        if(carry!=0)
+        {
+            ListNode node=new ListNode(1);
+            node.next=l1;
+            l1=node;
         }
 
-        return reverseList(dummy.next);
+        return l1;
 
+
+        
     }
 }
