@@ -20,22 +20,21 @@ class ListNode {
 }
  */
 
-class Solution {
+class Solution 
+{
+    private ListNode reverse(ListNode curr,ListNode prev)
+    {
+        if(curr==null)
+        {
+            return prev;
+        }
+        ListNode nextNode=curr.next;
+        curr.next=prev;
+        return reverse(nextNode,curr);
+    }
     public ListNode reverseList(ListNode head) 
     {
         if(head==null || head.next==null) return head;
-        ListNode curr=head;
-        ListNode prev=null;
-        while(curr!=null)
-        {
-            ListNode nextNode=curr.next;
-            curr.next=prev;
-            prev=curr;
-            curr=nextNode;
-        }
-
-        return prev;
-
-        
+        return reverse(head,null);
     }
 }
