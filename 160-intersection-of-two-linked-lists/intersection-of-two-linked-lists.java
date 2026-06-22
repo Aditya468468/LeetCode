@@ -1,38 +1,48 @@
-/**
- * Definition for singly-linked list.
- * public class ListNode {
- *     int val;
- *     ListNode next;
- *     ListNode(int x) {
- *         val = x;
- *         next = null;
- *     }
- * }
- */
-public class Solution {
+class Solution 
+{
+    private int length(ListNode head)
+    {
+        ListNode temp=head;
+        int len=0;
+        while(temp!=null)
+        {
+            temp=temp.next;
+            len++;
+        }
+        return len;
+    }
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) 
     {
-        // Hashing Approach
-        HashMap<ListNode,Integer> map=new HashMap<>();
-        ListNode temp1=headA;
-        while(temp1!=null)
+        // Length-Based Approach
+        int l1=length(headA);
+        int l2=length(headB);
+        int diff=Math.abs(l1-l2);
+        //Gap Method
+        ListNode fast=null;
+        ListNode slow=null;
+        if(l1>l2)
         {
-            int val=temp1.val;
-            map.put(temp1,val);
-            temp1=temp1.next;
+            fast=headA;
+            slow=headB;
         }
-        ListNode temp2=headB;
-        while(temp2!=null)
+        else
         {
-            if(map.containsKey(temp2))
-            {
-                return temp2;
-            }
-            temp2=temp2.next;
+            fast=headB;
+            slow=headA;
+        }
+        for(int i=0;i<diff;i++)
+        {
+            fast=fast.next;
+        }
+        while(fast!=slow)
+        {
+            fast=fast.next;
+            slow=slow.next;
         }
 
-        return null;
+        return slow;
 
         
+
     }
 }
