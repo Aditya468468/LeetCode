@@ -16,7 +16,7 @@ class Solution
         {
             return 0;
         }
-        int carry=multiply(curr.next);
+        int carry=multiply(curr.next); //Head Recursion
         int x=(curr.val*2)+carry;
         curr.val=x%10;
         return x/10;
@@ -33,8 +33,5 @@ class Solution
         }
         return head;
 
-        
-
-        
     }
 }
