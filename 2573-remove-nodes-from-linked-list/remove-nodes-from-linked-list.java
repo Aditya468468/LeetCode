@@ -35,22 +35,24 @@ class Solution
         int maxValue=head.val;
         while(curr!=null)
         {
+            ListNode nextNode=curr.next;
             if(curr.val>=maxValue)
             {
                 maxValue=curr.val;
                 prev=curr;
-                curr=curr.next;
             }
             else
             {
-                ListNode nextNode=curr.next;
                 prev.next=curr.next;
-                curr=nextNode;
+                //prev wont change, As we still dont know the safe next pointer to keep prev.
             }
+             curr=nextNode;
 
         }
 
         return reverse(head);
+
+        //Note-Kind off Leader in Array Type of Prblm.
         
     }
 }
