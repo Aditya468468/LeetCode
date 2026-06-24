@@ -1,48 +1,28 @@
-class Solution 
-{
-    private int length(ListNode head)
-    {
-        ListNode temp=head;
-        int len=0;
-        while(temp!=null)
-        {
-            temp=temp.next;
-            len++;
-        }
-        return len;
-    }
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) {
+ *         val = x;
+ *         next = null;
+ *     }
+ * }
+ */
+public class Solution {
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) 
     {
-        // Length-Based Approach
-        int l1=length(headA);
-        int l2=length(headB);
-        int diff=Math.abs(l1-l2);
-        //Gap Method
-        ListNode fast=null;
-        ListNode slow=null;
-        if(l1>l2)
+        ListNode temp1=headA;
+        ListNode temp2=headB;
+        while(temp1!=temp2)
         {
-            fast=headA;
-            slow=headB;
-        }
-        else
-        {
-            fast=headB;
-            slow=headA;
-        }
-        for(int i=0;i<diff;i++)
-        {
-            fast=fast.next;
-        }
-        while(fast!=slow)
-        {
-            fast=fast.next;
-            slow=slow.next;
+            if(temp1!=null) temp1=temp1.next;
+            else temp1=headB;
+            if(temp2!=null) temp2=temp2.next;
+            else temp2=headA;
         }
 
-        return slow;
-
+        return temp1;
         
-
     }
 }
