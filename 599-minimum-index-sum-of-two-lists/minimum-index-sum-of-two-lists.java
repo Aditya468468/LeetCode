@@ -1,15 +1,5 @@
 class Solution 
 {
-    class Pair
-    {
-        String s;
-        int val;
-        public Pair(String s,int val)
-        {
-            this.s=s;
-            this.val=val;
-        }
-    }
     public String[] findRestaurant(String[] list1, String[] list2) 
     {
         HashMap<String,Integer> map=new HashMap<>();
@@ -20,7 +10,7 @@ class Solution
                 map.put(list1[i],i);
             }
         }
-        List<Pair> ans=new ArrayList<>();
+        List<String> ans=new ArrayList<>();
         int minSum=Integer.MAX_VALUE;
         for(int i=0;i<list2.length;i++)
         {
@@ -28,25 +18,24 @@ class Solution
             {
         
                 int sum=i+map.get(list2[i]);
-                Pair p=new Pair(list2[i],sum);
-                ans.add(p);
-                minSum=Math.min(minSum, sum);
+                if(minSum>sum)
+                {
+                    ans.clear();
+                    ans.add(list2[i]);
+                    minSum=sum;
+                }
+                else if(minSum==sum)
+                {
+                    ans.add(list2[i]);
+                }
             }
         }
-        List<String> list=new ArrayList<>();
-        for(int i=0;i<ans.size();i++)
-        {
-            Pair curr=ans.get(i);
-            if(curr.val==minSum)
-            {
-                list.add(curr.s);
-            }
-        }
-        String[] res=new String[list.size()];
+    
+        String[] res=new String[ans.size()];
         int idx=0;
         for(int i=0;i<res.length;i++)
         {
-            res[idx++]=list.get(i);
+            res[idx++]=ans.get(i);
         }
 
         return res;
