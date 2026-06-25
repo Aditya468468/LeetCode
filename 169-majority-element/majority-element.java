@@ -20,18 +20,6 @@ class Solution {
                 cnt--;
             }
         }
-        int count=0;
-        for(int i=0;i<n;i++)
-        {
-            if(nums[i]==major)
-            {
-                count++;
-                if(count>n/2)
-                {
-                    return major;
-                }
-            }
-        }
 
         return major;
     }
