@@ -10,17 +10,6 @@
  */
 class Solution 
 {
-    private int length(ListNode head)
-    {
-        int len=0;
-        ListNode temp=head;
-        while(temp!=null)
-        {
-            len++;
-            temp=temp.next;
-        }
-        return len;
-    }
     public ListNode merge(ListNode headA,ListNode headB)
     {
         ListNode temp1=headA;
@@ -54,28 +43,28 @@ class Solution
         return dummy.next;
 
     }
-    public ListNode NthNode(ListNode head,int n)
+    public ListNode middleNode(ListNode head)
     {
         if(head==null || head.next==null) return head;
-        ListNode temp=head;
-        for(int i=0;i<n-1;i++)
+        ListNode fast=head.next;
+        ListNode slow=head;
+        while(fast!=null && fast.next!=null)
         {
-            if(temp==null) return null;
-            temp=temp.next;
+            fast=fast.next.next;
+            slow=slow.next;
         }
-        return temp;
+
+        return slow;
 
     }
     public ListNode mergeSort(ListNode head)
     {
       
         if(head==null || head.next==null) return head;
-        int len=length(head);
-        ListNode mid=NthNode(head,len/2);
+        ListNode mid=middleNode(head);
         ListNode right = mid.next;
         mid.next = null;
-        // ListNode left=mergeSort(head);
-        // ListNode right=mergeSort(right);
+
         return merge(mergeSort(head),mergeSort(right));
     
     }
