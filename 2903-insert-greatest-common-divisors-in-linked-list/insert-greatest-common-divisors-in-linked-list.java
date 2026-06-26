@@ -12,16 +12,20 @@ class Solution
 {
     public int gcd(int a,int b)
     {
-        int max=Math.max(a,b);
-        int min=Math.min(a,b);
-        for(int i=min;i>0;i--)
+        while(a!=0 && b!=0)
         {
-            if(a%i==0 && b%i==0)
+            if(a>b)
             {
-                return i;
+                a=a%b;
+            }
+            else
+            {
+                b=b%a;
+
             }
         }
-        return -1; //dummy
+        if(a==0) return b;
+        else return a;
     }
     public ListNode insertGreatestCommonDivisors(ListNode head) 
     {
