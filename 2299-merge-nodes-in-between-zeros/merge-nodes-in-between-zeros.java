@@ -10,39 +10,30 @@
  */
 class Solution 
 {
-    private int add(ListNode start,ListNode end)
-    {
-        ListNode temp=start;
-        int sum=0;
-        while(temp!=end.next)
-        {
-            sum+=temp.val;
-            temp=temp.next;
-        }
-        return sum;
-
-    }
     public ListNode mergeNodes(ListNode head) 
     {
         if(head==null || head.next==null) return head;
         ListNode dummy=new ListNode(-1);
         ListNode curr=dummy;
-        ListNode prevZero=head;
+        int sum=0;
         ListNode temp=head.next;
-        while(temp.next!=null)
+        while(temp!=null)
         {
-            if(temp.next.val==0)
+            ListNode nextNode=temp.next;
+            if(temp.val==0)
             {
-                int x=add(prevZero.next,temp);
-                ListNode node=new ListNode(x);
-                curr.next=node;
-                curr=node;
+                temp.val=sum;// Using the 0 node itself as a part of my result to save memory.
+                curr.next=temp;
+                temp.next=null;
+                curr=temp;
+                sum=0;
+
             }
-            else if(temp.val==0)
+            else 
             {
-                prevZero=temp;
+                sum+=(temp.val);
             }
-            temp=temp.next;
+            temp=nextNode;
         }
 
         return dummy.next;
