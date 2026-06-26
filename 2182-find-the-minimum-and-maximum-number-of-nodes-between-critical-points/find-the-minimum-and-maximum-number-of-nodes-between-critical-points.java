@@ -17,39 +17,42 @@ class Solution {
         ListNode prev=head;
         ListNode curr=head.next;
         int cnt=2;
+        int firstPoint = -1;
+        int prevPoint = -1;
+        int minDistance = Integer.MAX_VALUE;
         while(curr.next!=null)
         {
             ListNode nextNode=curr.next;
-            int currV=curr.val;
-            int nextV=nextNode.val;
-            int prevV=prev.val;
-            if(prevV<currV && currV>nextV)
+            int currV = curr.val;
+            int nextV = nextNode.val;
+            int prevV = prev.val;
+            
+            if ((prevV < currV && currV > nextV) || (prevV > currV && currV < nextV)) 
             {
-                list.add(cnt);
-            }
-            else if(prevV>currV && currV<nextV)
+            // If this is the very first critical point found
+            if (firstPoint==-1) 
             {
-                list.add(cnt);
+                firstPoint=cnt;
+            } 
+            else 
+            {
+                // If we've already found a previous point, update the minimum distance
+                minDistance = Math.min(minDistance,cnt - prevPoint);
             }
+            prevPoint=cnt;
+        }
             prev=curr;
             curr=curr.next;
             cnt++;
         }
-        if(list.size()<2) return new int[]{-1,-1};
-        // Well The List would be aleady sorted..soo max diff will be btw
-        // the end points.
-        int max=list.get(list.size()-1)-list.get(0);
-        //The Min dis will be btw adj elements as List is Sorted.
-        int min=Integer.MAX_VALUE;
-        for(int i=1;i<list.size();i++)
+        if (firstPoint == prevPoint) 
         {
-            int val=list.get(i)-list.get(i-1);
-            min=Math.min(min,val);
+            return new int[]{-1, -1};// Just One Point 
         }
 
-        return new int[]{min,max};
+        int maxDistance = prevPoint-firstPoint;
 
-
+        return new int[]{minDistance,maxDistance};
         
     }
 }
