@@ -46,7 +46,7 @@ class Solution
     public ListNode middleNode(ListNode head)
     {
         if(head==null || head.next==null) return head;
-        ListNode fast=head.next;
+        ListNode fast=head.next; // We need the First Middle node in even-len,As it will be our left half.
         ListNode slow=head;
         while(fast!=null && fast.next!=null)
         {
