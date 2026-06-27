@@ -12,7 +12,7 @@ class Solution {
     public ListNode middleNode(ListNode head) 
     {
         if(head==null || head.next==null) return head;
-        ListNode fast=head;
+        ListNode fast=head; // If we need 1st Middle in even len, do fast=head.next.
         ListNode slow=head;
         while(fast!=null && fast.next!=null)
         {
