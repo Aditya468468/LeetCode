@@ -39,8 +39,11 @@ class Solution {
                 }
                 elem=elem*elem;
             }
-            if(!single) len--; // if we dont have any single elem
-            // We need to make it Odd len as ques said-- x1,x2...last...xn...x1 .. So The last elem just comes ones...soo if get it its good else . we make len odd to handle it
+            if(!single) len--;
+            //If the chain ended without a single occurrence,
+            //the last value was counted twice.
+            //Remove one occurrence because the sequence must end
+            //with exactly one copy of the last element.
             maxLen=Math.max(maxLen,len);
         }
         return maxLen;
