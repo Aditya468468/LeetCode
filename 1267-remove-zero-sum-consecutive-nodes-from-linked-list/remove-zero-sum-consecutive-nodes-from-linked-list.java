@@ -19,7 +19,6 @@ class Solution {
         dummy.next=head;
         ListNode temp=head;
         int sum=0;
-        ListNode prev=dummy;
         while(temp!=null)
         {
             ListNode nextNode=temp.next;
@@ -35,7 +34,6 @@ class Solution {
                     map.remove(tempSum);
                     toRemove = toRemove.next;
                 }
-                prev=prevNode;
                 prevNode.next=nextNode;
                 temp.next=null;
                 temp=nextNode;
@@ -44,7 +42,6 @@ class Solution {
             else
             {
                 map.put(sum,temp);
-                prev=temp;
                 temp=nextNode;
 
             }
