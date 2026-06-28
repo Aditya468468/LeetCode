@@ -13,31 +13,22 @@ class Solution {
     {
         if(head==null || head.next==null) return head;
         ListNode dummy=new ListNode(-1);
+        dummy.next=head;
         ListNode prevTail=dummy;
-        ListNode prev=head;
-        ListNode curr=head.next;
-        while(curr!=null && curr.next!=null)
+        while(prevTail.next!=null && prevTail.next.next!=null) // So we see from the prevTail, do I have 2 nodes in Front of me.
         {
             //Storing Future connections
-            ListNode nextCurr=curr.next.next; // 2 nodes;
-            ListNode nextPrev=prev.next.next; // 2 nodes;
+            ListNode prev=prevTail.next;
+            ListNode curr=prev.next; 
     
             //Conecting 
+            prev.next=curr.next;
             curr.next=prev;
-            prev.next=nextPrev;
             prevTail.next=curr;
             // Moving
             prevTail=prev;
-            prev=nextPrev;
-            curr=nextCurr;
         }
-        if(curr!=null)
-        {
-            curr.next=prev;
-            prev.next=null;
-            prevTail.next=curr;
-        }
-
+        
         return dummy.next;
         
     }
