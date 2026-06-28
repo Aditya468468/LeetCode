@@ -13,31 +13,32 @@ class Solution {
     {
         if(head==null || head.next==null) return head;
         ListNode dummy=new ListNode(-1);
-        ListNode groupHead=dummy;
-        ListNode curr=head.next;
+        ListNode prevTail=dummy;
         ListNode prev=head;
+        ListNode curr=head.next;
         while(curr!=null && curr.next!=null)
         {
-            ListNode nextNode=curr.next;
-            ListNode nextCurr=curr.next.next;
+            //Storing Future connections
+            ListNode nextCurr=curr.next.next; // 2 nodes;
+            ListNode nextPrev=prev.next.next; // 2 nodes;
+    
+            //Conecting 
             curr.next=prev;
-            prev.next=nextNode;
-            groupHead.next=curr;
-            groupHead=prev;
+            prev.next=nextPrev;
+            prevTail.next=curr;
+            // Moving
+            prevTail=prev;
+            prev=nextPrev;
             curr=nextCurr;
-            prev=nextNode;
-
         }
         if(curr!=null)
         {
             curr.next=prev;
-            groupHead.next=curr;
             prev.next=null;
+            prevTail.next=curr;
         }
 
         return dummy.next;
-
-
         
     }
 }
