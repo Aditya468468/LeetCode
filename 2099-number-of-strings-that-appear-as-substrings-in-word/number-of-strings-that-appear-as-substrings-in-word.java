@@ -7,19 +7,16 @@ class Solution {
             String s=patterns[i];
             if(s.length()>word.length()) continue;
             int len=s.length();
-            for(int j=0;j<word.length();j++)
+            for(int j=0;j<=word.length()-len;j++)
             {
-                boolean match=false;
-                StringBuilder str = new StringBuilder();
-                for(int k=j;k<word.length();k++)
+                boolean match=true;
+                for(int k=0;k<len;k++)
                 {
-                    str.append(word.charAt(k));
-                    if(str.toString().equals(s))
-                    {
-                        match=true;
+                   if (word.charAt(j+k)!=s.charAt(k)) {
+                        match = false;
                         break;
                     }
-                    if(k-j+1>len) break;
+
                 }
                 if(match)
                 {
