@@ -8,39 +8,46 @@
  *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
  * }
  */
-class Solution {
+class Solution 
+{
+    private int length(ListNode head)
+    {
+        ListNode temp=head;
+        int len=0;
+        while(temp!=null)
+        {
+            temp=temp.next;
+            len++;
+        }
+
+        return len;
+
+    }
     public ListNode rotateRight(ListNode head, int k) 
     {
-        if(head == null || head.next == null || k == 0)
-            return head;
-
-        // Step 1: find length
-        ListNode temp = head;
-        int n = 1;
-        while(temp.next != null)
+        if(head==null || head.next==null) return head;
+        int len=length(head);
+        k=k%len;
+        if(k==0) return head;
+        ListNode fast=head;
+        for(int i=0;i<k;i++)
         {
-            temp = temp.next;
-            n++;
+            fast=fast.next;
         }
-
-        // Step 2: make circular
-        temp.next = head;
-
-        // Step 3: reduce k
-        k = k % n;
-        int stepsToNewHead = n - k;
-
-        // Step 4: move to new tail
-        ListNode newTail = head;
-        for(int i = 1; i < stepsToNewHead; i++)
+        if(fast==null) return head;
+        ListNode slow=head;
+        while(fast.next!=null)
         {
-            newTail = newTail.next;
+            fast=fast.next;
+            slow=slow.next;
+            
         }
+        ListNode node=slow.next;
+        slow.next=null;
+        fast.next=head;
+        head=node;
 
-        // Step 5: break
-        ListNode newHead = newTail.next;
-        newTail.next = null;
-
-        return newHead;
+        return head;
+        
     }
 }
