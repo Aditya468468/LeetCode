@@ -60,7 +60,9 @@ class Solution
         ListNode mid=middle(head);
         ListNode right=mid.next;
         mid.next=null;
-        return merge(mergeSort(head),mergeSort(right));
+        ListNode leftHalve=mergeSort(head);
+        ListNode rightHalve=mergeSort(right);
+        return merge(leftHalve,rightHalve);
     }
     public ListNode sortList(ListNode head) 
     {
