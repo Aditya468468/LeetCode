@@ -17,28 +17,55 @@ class Node {
 class Solution {
     public Node copyRandomList(Node head) 
     {
-        HashMap<Node,Node> map=new HashMap<>();
+        if(head==null) return null;
         Node temp=head;
+        //Insert the deepNodes btw nodes
         while(temp!=null)
         {
-           Node node=new Node(temp.val);
-            map.put(temp,node);
-            temp=temp.next;
-
+            Node nextNode=temp.next;
+            Node node = new Node(temp.val);
+            temp.next=node;
+            node.next=nextNode;
+            temp = nextNode;
         }
-
+        // Connecting Random Pointers
+        temp=head;
+        // Node dummy=new Node(-1);
+        // Node curr=dummy;
+        while(temp!=null && temp.next!=null)
+        {
+            Node deepNode=temp.next;
+            Node random=temp.random;
+            Node deepRandom = null;
+            if(random!=null) 
+            {
+                deepRandom = random.next;
+            }
+            deepNode.random=deepRandom;
+            temp=temp.next.next;
+        }
+        // Connecting Next Pointers.
+        Node dummy=new Node(-1);
+        dummy.next=head.next;
         temp=head;
         while(temp!=null)
         {
-            Node next=temp.next;
-            Node random=temp.random;
-            Node deepNode=map.get(temp);
-            Node deepNext=map.get(next);
-            Node deepRandom=map.get(random);
-            deepNode.next=deepNext;
-            deepNode.random=deepRandom;
-            temp=temp.next;
+            Node deepNode=temp.next;
+            Node nextNode=deepNode.next;
+            temp.next=nextNode;
+            if(nextNode==null)
+            {
+                deepNode=null;
+            }
+            else
+            {
+                deepNode.next=nextNode.next;
+            }
+            temp=nextNode;
+          
         }
-        return map.get(head);
+
+        return dummy.next;
+
     }
 }
