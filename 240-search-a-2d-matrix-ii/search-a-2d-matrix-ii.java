@@ -8,13 +8,11 @@ class Solution {
         while(r<n && c>=0)
         {
             if(matrix[r][c]==target) return true;
-            else if(matrix[r][c]>target) c--;
+            if(matrix[r][c]>target) c--; //Tc-O(n+m)
             else r++;
         }
 
         return false;
-
-
-      
+        
     }
 }
