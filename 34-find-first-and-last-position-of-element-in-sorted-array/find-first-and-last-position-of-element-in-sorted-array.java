@@ -1,58 +1,47 @@
-class Solution {
-    public int lowerBound(int []nums,int x)
+class Solution 
+{
+    private int firstIdx(int[]nums,int target)
     {
         int low=0;
         int high=nums.length-1;
-        int ans=nums.length;
         while(low<=high)
         {
             int mid=low+(high-low)/2;
-            if(nums[mid]>=x)
-            {
-                ans=mid;
-                high=mid-1;
-            }
-            else 
+            if(nums[mid]<target)
             {
                 low=mid+1;
             }
+            else
+            {
+                high=mid-1;
+            }
         }
-        return ans;
+        return low;
     }
-    public int upperBound(int[]nums,int x)
+    private int lastIdx(int[]nums,int target)
     {
         int low=0;
         int high=nums.length-1;
-        int ans=nums.length;
         while(low<=high)
         {
             int mid=low+(high-low)/2;
-            if(nums[mid]>x)
-            {
-                ans=mid;
-                high=mid-1;
-            }
-            else 
+            if(nums[mid]<=target)
             {
                 low=mid+1;
             }
+            else
+            {
+                high=mid-1;
+            }
         }
-        return ans;
-
+        return high;
+        
     }
     public int[] searchRange(int[] nums, int target) 
     {
-        int first=-1;
-        int idx1=lowerBound(nums,target);
-        if(idx1<nums.length && nums[idx1]==target) first=idx1;
-        int last=-1;
-        int idx2=upperBound(nums,target);
-        if(first!=-1)
-            last=idx2-1;
-        else
-            last=-1;
-        return new int[]{first,last};
-
-    
+        int first=firstIdx(nums,target);
+        if(first==nums.length || nums[first]!=target) return new int[]{-1,-1};
+        int last=lastIdx(nums,target);
+        return new int[]{first,last};        
     }
 }
