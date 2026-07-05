@@ -41,6 +41,8 @@ class Solution
     public char findKthBit(int n, int k) 
     {
 
+        if(k==1) return '0';
+
         StringBuilder str=makeString(1,n,new StringBuilder());
         int len=str.length();
         if(len<k) return ' ';
