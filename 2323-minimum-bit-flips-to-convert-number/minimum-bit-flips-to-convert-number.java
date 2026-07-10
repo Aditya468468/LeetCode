@@ -1,18 +1,17 @@
 class Solution {
     public int minBitFlips(int start, int goal) 
     {
-        int z=start^goal;
-        int cnt=0; 
-        while(z!=0) // count set bits 
+        //Lets see how many bits they diff by
+        int num = start^goal;
+        //Lets calculate the num of set bits.
+        int cnt=0;
+        while(num!=0)
         {
-            cnt+=z&1;
-            z=z>>1;
-        }   
+            num=num&(num-1);
+            cnt++;
+        }
 
         return cnt;
         
     }
 }
-
-        
-    
