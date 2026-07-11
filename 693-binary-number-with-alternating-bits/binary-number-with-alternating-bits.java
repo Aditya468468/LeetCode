@@ -1,26 +1,17 @@
 class Solution {
     public boolean hasAlternatingBits(int n) 
     {
-        boolean isSetBit = ((n&1)==1);
-        n=n>>1;
-    
-        while(n!=0)
+        int mask=0;
+        int temp=n;
+        while(temp!=0)
         {
-            if(isSetBit)
-            {
-                if((n&1)!=0) return false;
-                isSetBit=false;
-            }
-            else if(!isSetBit)
-            {
-                if((n&1)==0) return false;
-                isSetBit=true;
-            }
-            n=n>>1;
+            mask=(mask<<1)|1;
+            temp=temp>>1;
         }
-
-        return true;
+        int x=n>>1;
         
+        return ((n^x)==mask);
+
         
     }
 }
