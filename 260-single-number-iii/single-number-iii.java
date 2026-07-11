@@ -4,24 +4,27 @@ class Solution {
         int xor=0;
         for(int x:nums)
         {
-            xor^=x;
+            xor=xor^x;
         }
-        int rightMostBit=((xor&(xor-1)))^(xor);
-        int b1=0;
-        int b2=0;
+        
+        int diffBit=(xor&(xor-1))^(xor);
+        
+        int a=0;
+        int b=0;
+        
         for(int i=0;i<nums.length;i++)
         {
-            if((nums[i]&rightMostBit)!=0)
+            if((nums[i]&diffBit)!=0)
             {
-                b1^=nums[i];
+                a=a^nums[i];
             }
-            else 
+            else
             {
-                b2^=nums[i];
+                b=b^nums[i];
             }
         }
 
-        return new int[]{b1,b2};
+        return new int[]{a,b};
         
     }
 }
