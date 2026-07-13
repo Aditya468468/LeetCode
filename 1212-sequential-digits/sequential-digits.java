@@ -41,7 +41,7 @@ class Solution {
         {
             generateSeq(ref,low,high,i,list);
         }
-        Collections.sort(list);
+        
         return list;
 
         
