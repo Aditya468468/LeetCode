@@ -4,25 +4,21 @@ class Solution {
         int n=nums.length;
         if(n==1) return 0;
         int minJumps=0;
-        int curr=0;
-        int maxReach=nums[0];
-        while(curr<nums.length-1)
+        int endPoint=0;
+        int maxReach=0;
+    
+        for(int i=0;i<n-1;i++)
         {
-            if(curr+nums[curr] >= n-1) return minJumps + 1; //Direct
-            int max=-1;
-            int bestIdx=-1;
-            for(int i=curr+1;i<=Math.min(maxReach,n-1);i++)
+            maxReach=Math.max(nums[i]+i,maxReach);
+            if(i==endPoint)
             {
-                if(max<i+nums[i])
-                {
-                    bestIdx=i;
-                    max=i+nums[i];
+                endPoint=maxReach;
+                minJumps++;
+                if (endPoint>=n-1) {
+                    break;
                 }
             }
-            if (bestIdx == -1) return -1;
-            curr=bestIdx;
-            maxReach=max;
-            minJumps++;
+
         }
 
         return minJumps;
