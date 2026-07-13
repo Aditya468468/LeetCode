@@ -25,6 +25,7 @@ class Solution {
             {
                 int num=Integer.parseInt(ref.substring(left,right+1));
                 if(num>=low && num<=high) list.add(num);
+                if(num>high) return;
         
             }
         }
