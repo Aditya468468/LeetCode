@@ -1,3 +1,4 @@
+
 SELECT 
     DISTINCT currLog.num ConsecutiveNums
 FROM Logs as currLog
