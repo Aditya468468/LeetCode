@@ -2,7 +2,7 @@
 class Solution {
     public int eraseOverlapIntervals(int[][] intervals) 
     {
-        
+        if (intervals.length <= 1) return 0;
         Arrays.sort(intervals,(a,b)->
         {
             if(a[0]==b[0]) return a[1]-b[1];
