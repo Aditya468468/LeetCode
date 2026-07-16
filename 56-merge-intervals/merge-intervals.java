@@ -18,10 +18,10 @@ class Solution {
             int[] prevInterval=list.get(list.size()-1);
             if(prevInterval[1]>=intervals[i][0])
             {
-                list.get(list.size()-1)[1]=Math.max(intervals[i][1],list.get(list.size()-1)[1]);
+                prevInterval[1]=Math.max(intervals[i][1],prevInterval[1]); // Update the endPoint
 
             }
-            else
+            else // Non overlap, Add it 
             {
                 list.add(intervals[i]);
             }
