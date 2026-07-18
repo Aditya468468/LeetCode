@@ -32,9 +32,10 @@ class Solution {
                 else
                 {
                     ans=lastPassenger-1;
-                    idx=j-2;
+                    idx=j-2; // Need to come 1 before the lastPassenger, j has taken one extra step before breaking out, last passenger is at j-1,
+                    // and one before it is (j-1)-1.
                 }
-
+               
                 while(idx>=0 && passengers[idx]==ans)
                 {
                     ans--;
