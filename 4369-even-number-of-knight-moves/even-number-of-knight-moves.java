@@ -7,7 +7,7 @@ class Solution {
         { 2, -1}, { 2, 1}
     };
 
-    boolean[][][] visited = new boolean[8][8][2];
+    boolean[][][] visited = new boolean[8][8][2]; // we can reach there with odd or even moves, soo parity is kept.
     int targetX,targetY;
 
     private boolean dfs(int i, int j, int moves) {
