@@ -1,16 +1,17 @@
-SELECT employee_id FROM
-(
-    SELECT e.employee_id, e.name, s.salary
-    FROM Employees e
-    LEFT JOIN Salaries s
-    ON e.employee_id = s.employee_id
+SELECT
+    emp.employee_id
+FROM Employees emp
+LEFT JOIN Salaries s
+ON emp.employee_id = s.employee_id
+WHERE s.employee_id IS NULL
 
-    UNION
+UNION
 
-    SELECT s.employee_id, e.name, s.salary
-    FROM Employees e
-    RIGHT JOIN Salaries s
-    ON e.employee_id = s.employee_id
-) AS result
-WHERE employee_id IS NULL OR name IS NULL OR salary IS NULL
+SELECT
+    s.employee_id
+FROM Employees emp
+RIGHT JOIN Salaries s
+ON emp.employee_id = s.employee_id
+WHERE emp.employee_id IS NULL
+
 ORDER BY employee_id;
