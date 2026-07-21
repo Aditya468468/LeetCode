@@ -21,7 +21,7 @@ HAVING COUNT(*)=
         )
 ) as result
 
-UNION ALL
+UNION ALL -- Rebecca and Rebecca --> WILL GIVE ONLY ONE Rebecca After UNION
 
 SELECT
     MIN(title) as results 
