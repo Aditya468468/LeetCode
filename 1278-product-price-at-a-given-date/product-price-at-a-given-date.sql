@@ -16,13 +16,13 @@ ON p.product_id=u.product_id AND u.max_change_date=p.change_date
 
 UNION
 
-SELECT  --  If Not the Just give there price as 10
+SELECT DISTINCT --  If Not the Just give there price as 10
     p.product_id,
     10 AS price 
 FROM Products as p
 LEFT JOIN updated u
 ON p.product_id=u.product_id 
-WHERE u.product_id IS NULL;
+WHERE u.product_id IS NULL; -- If they are not in updated table means they arent updated till 16th
 
 
    
