@@ -9,7 +9,7 @@ class Solution {
         });
         
         int cnt=0; // Counts Overlaps
-        int lastEnd=intervals[0][1];
+        int lastEnd=intervals[0][1]; //the best survivor among all conflicting intervals seen so far.
         for(int i=1;i<n;i++)
         {
             if(lastEnd<=intervals[i][0])
