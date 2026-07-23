@@ -1,29 +1,31 @@
-
 class Solution {
     public int eraseOverlapIntervals(int[][] intervals) 
     {
-        if (intervals.length <= 1) return 0;
+        int n=intervals.length;
+        //Need to calculate overlap intervals.
         Arrays.sort(intervals,(a,b)->
         {
-            if(a[0]==b[0]) return a[1]-b[1];
-            return a[0]-b[0];
+            return a[0]-b[0]; // Sort by start time, Sequential check
         });
-        int cnt=0;
-        int endTime=intervals[0][1];
-        for(int i=1;i<intervals.length;i++)
+        
+        int cnt=0; // Counts Overlaps
+        int lastEnd=intervals[0][1];
+        for(int i=1;i<n;i++)
         {
-            if(endTime<=intervals[i][0])
+            if(lastEnd<=intervals[i][0])
             {
-                endTime=intervals[i][1]; //Non over-lapping
+                lastEnd=intervals[i][1];
             }
-            else 
+            else
             {
-                cnt++;
-                endTime=Math.min(intervals[i][1],endTime);
+                cnt++; //overlap
+                lastEnd=Math.min(intervals[i][1],lastEnd);
             }
         }
 
         return cnt;
-       
+
+
+        
     }
 }
