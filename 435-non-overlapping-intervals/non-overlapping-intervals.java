@@ -2,29 +2,26 @@ class Solution {
     public int eraseOverlapIntervals(int[][] intervals) 
     {
         int n=intervals.length;
-        //Need to calculate overlap intervals.
+       
         Arrays.sort(intervals,(a,b)->
         {
-            return a[0]-b[0]; // Sort by start time, Sequential check
+            return a[1]-b[1]; // Sort by end time,We keep max Non-overlaps,
+            //what get erase is the conflicting overlaps
         });
-        
-        int cnt=0; // Counts Overlaps
-        int lastEnd=intervals[0][1]; //the best survivor among all conflicting intervals seen so far.
+
+        int lastEnd=intervals[0][1]; // Finishes the earliest
+        int cnt=1;
         for(int i=1;i<n;i++)
         {
             if(lastEnd<=intervals[i][0])
             {
-                lastEnd=intervals[i][1];
-            }
-            else
-            {
-                cnt++; //overlap
-                lastEnd=Math.min(intervals[i][1],lastEnd);
+                cnt++; // Non overlaps
+                lastEnd=intervals[i][1]; // Next candidate
             }
         }
 
-        return cnt;
-
+        return n-cnt; // Total-Non-overlaps=Overlapped
+        
 
         
     }
