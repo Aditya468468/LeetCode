@@ -1,52 +1,31 @@
-class Solution 
-{
-    public int insertPosition(int[][] intervals, int pos)
+class Solution {
+    public int[][] insert(int[][] intervals, int[] newInterval) 
     {
-        int low=0;
-        int high=intervals.length-1;
-        while(low<=high)
+        // Now comes the fun....
+        //Decompose it:- left + overlaps +right , as left and right are already non overlapping, We can safely put them as it is,Only issue is the overlaps,lets just fix it.By mergeing
+
+        List<int[]> list=new ArrayList<>();
+        int i=0;
+        int n=intervals.length;
+        //Left-> left finishes before newInterval starts
+        while(i<n && intervals[i][1]<newInterval[0]) 
         {
-            int mid=low+(high-low)/2;
-            if(intervals[mid][0]<=pos)
-            {
-                low=mid+1;
-            }
-            else
-            {
-                high=mid-1;
-            }
+            list.add(intervals[i]);
+            i++;
         }
-
-        return low;
-    }
-    public int[][] insert(int[][] Intervals, int[] newInterval) 
-    {
-
-        int pos=insertPosition(Intervals,newInterval[0]);
-        ArrayList<int[]> intervalsList=new ArrayList<>();
-        for(int []x:Intervals)
+        // Middle->newIntervals is still didnt finish and intervals starts so we merege them.
+        while(i<n && newInterval[1]>=intervals[i][0])
         {
-            intervalsList.add(x);
+            newInterval[1]=Math.max(newInterval[1],intervals[i][1]); 
+            newInterval[0] = Math.min(newInterval[0],intervals[i][0]);
+            // Imp need to check start and end both--> [1,3], [2,5]
+            i++;
         }
-       
-        intervalsList.add(pos,newInterval);
-        int n=intervalsList.size();
-        //Apply Merge Intervals
-        ArrayList<int[]> list=new ArrayList<>();
-        list.add(intervalsList.get(0));
-
-        for(int i=1;i<n;i++)
+        list.add(newInterval); // add the merege portion
+        while(i<n) // Left over Right part is Non-overlap only put them to ans
         {
-            int []prevInterval=list.get(list.size()-1);
-            if(prevInterval[1]>=intervalsList.get(i)[0])
-            {
-                prevInterval[1]=Math.max(intervalsList.get(i)[1],prevInterval[1]);
-            }
-            else
-            {
-                list.add(intervalsList.get(i));
-            }
-
+            list.add(intervals[i]);
+            i++;
         }
 
         int[][] ans=new int[list.size()][2];
@@ -57,6 +36,9 @@ class Solution
         }
 
         return ans;
+
+
+        
 
         
     }
