@@ -1,34 +1,54 @@
 class Solution 
 {
-    public int[][] insert(int[][] intervals, int[] newInterval) 
+    public int insertPosition(int[][] intervals, int pos)
     {
-        List<int[]> list=new ArrayList<>();
-        int i=0;
-        int n=intervals.length;
-
-        while(i<n && intervals[i][1]<newInterval[0]) // The Left Halve -> Non-Overlap
+        int low=0;
+        int high=intervals.length-1;
+        while(low<=high)
         {
-            list.add(intervals[i]);
-            i++;
+            int mid=low+(high-low)/2;
+            if(intervals[mid][0]<=pos)
+            {
+                low=mid+1;
+            }
+            else
+            {
+                high=mid-1;
+            }
         }
-        //Merge-> Middle Halve which overlaps
-        while(i<n && intervals[i][0]<=newInterval[1])
+
+        return low;
+    }
+    public int[][] insert(int[][] Intervals, int[] newInterval) 
+    {
+
+        int pos=insertPosition(Intervals,newInterval[0]);
+        ArrayList<int[]> intervalsList=new ArrayList<>();
+        for(int []x:Intervals)
         {
-            newInterval[1]=Math.max(newInterval[1],intervals[i][1]);
-            newInterval[0] = Math.min(newInterval[0],intervals[i][0]);
-            i++;
+            intervalsList.add(x);
         }
-        list.add(newInterval); // Add the Merged Interval
+       
+        intervalsList.add(pos,newInterval);
+        int n=intervalsList.size();
+        //Apply Merge Intervals
+        ArrayList<int[]> list=new ArrayList<>();
+        list.add(intervalsList.get(0));
 
-        while(i<n) // Add The Rest Right Halve
-        { 
-            list.add(intervals[i]);
-            i++;
+        for(int i=1;i<n;i++)
+        {
+            int []prevInterval=list.get(list.size()-1);
+            if(prevInterval[1]>=intervalsList.get(i)[0])
+            {
+                prevInterval[1]=Math.max(intervalsList.get(i)[1],prevInterval[1]);
+            }
+            else
+            {
+                list.add(intervalsList.get(i));
+            }
 
         }
-        // Remember we can do this because ques says we Already Have Non-overlapping
-        // intervals, Only adding newInterval may cause Ovelaps.
-        
+
         int[][] ans=new int[list.size()][2];
         int idx=0;
         for(int[] x:list)
@@ -37,9 +57,6 @@ class Solution
         }
 
         return ans;
-
-
-
 
         
     }
