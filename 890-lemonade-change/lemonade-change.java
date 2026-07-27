@@ -1,44 +1,39 @@
 class Solution {
     public boolean lemonadeChange(int[] bills) 
     {
-       
-        int change=0; // Given in Ques
         int billOf5=0;
         int billOf10=0;
+        int n=bills.length;
 
-        for(int i=0;i<bills.length;i++) // Process smaller->larger
+        for(int i=0;i<n;i++)
         {
-            if(bills[i]==5) billOf5++;
+            if(bills[i]==5)
+            {
+                billOf5++;
+            }
             else if(bills[i]==10)
             {
-                if(billOf5<1) return false;
+                if(billOf5<=0) return false;
+                billOf10++;
                 billOf5--;
-                billOf10++;   
             }
             else
             {
-                //20-> can give 10 one + 5 one
-                // Or 5-> three., First we give 10 version as 5 bills we store for 10$ cus as they need the change of 5$
-                if(billOf5<1) return false; // Both cases need atleast 1 billOf5.
-                else if(billOf10>=1)
+                if(billOf10>0 && billOf5>0)
                 {
                     billOf10--;
                     billOf5--;
                 }
-                else if(billOf10<1)
+                else if(billOf5>=3)
                 {
-                    if(billOf5<3) return false;
-                    billOf5-=3; //used 3.
+                    billOf5-=3;
                 }
+                else return false;
             }
-            
-
         }
 
         return true;
 
-                        
-        
         
     }
 }
