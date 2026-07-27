@@ -3,24 +3,21 @@ class Solution {
     {
         int n=nums.length;
         if(n==1) return 0;
-        int minJumps=0;
-        int endPoint=0;
-        int maxReach=0;
-    
-        for(int i=0;i<n-1;i++)
+        int jumps=0;
+        int maxSoFar=0;
+        int currEnd=0;
+        for(int i=0;i<n;i++)
         {
-            maxReach=Math.max(nums[i]+i,maxReach);
-            if(i==endPoint)
+            if(currEnd>=n-1) break;
+            maxSoFar=Math.max(maxSoFar,i+nums[i]);
+
+            if(i==currEnd) //Done with the region
             {
-                endPoint=maxReach;
-                minJumps++;
-                if (endPoint>=n-1) {
-                    break;
-                }
+                jumps++;
+                currEnd=maxSoFar;
             }
+        }       
 
-        }
-
-        return minJumps;
+        return jumps; 
     }
 }
