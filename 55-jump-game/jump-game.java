@@ -1,15 +1,18 @@
 class Solution {
     public boolean canJump(int[] nums) 
     {
-        int maxFar=0;
+        int maxReach=0;
         int n=nums.length;
-        for(int i=0;i<nums.length;i++)
+        for(int i=0;i<n;i++)
         {
-            if(i>maxFar) return false;  // Validate
-            maxFar=Math.max(maxFar,i+nums[i]); //Update
-            if(maxFar>=nums.length-1) return true; //Check
+            if(i>maxReach) return false;//Can i even reach that idx?? If not return false
+            int reach=i+nums[i];
+            maxReach=Math.max(maxReach,reach); //Update
+            if(maxReach>=n-1) return true; // We crossed the line , Vamos 
         }
-        return true ; // Dummy
-        
+
+
+        return true;
+       
     }
 }
