@@ -2,40 +2,40 @@ class Solution {
     public int candy(int[] ratings) 
     {
         int n=ratings.length;
-        int sum=1;
-        int i=1;
+        int[] candies=new int[n];
         
-       
-        while(i<n)
-        { 
-            if(ratings[i]==ratings[i-1]) //slant
+        //Left Cost, ith idx is just concerned about its Left Neighbour
+        candies[0]=1; // No left Neighbour, Acc to left cons it should get 1 candy
+        for(int i=1;i<n;i++)
+        {
+            if(ratings[i]>ratings[i-1])
             {
-                sum+=1;
-                i++;
-                continue;
+                candies[i]=candies[i-1]+1; // Slightly More (Just 1);
             }
-            int peak=1;
-            while(i<n && ratings[i]>ratings[i-1]) // Uphill
+            else
             {
-                peak++;
-                sum+=peak;
-                i++;
-            } 
-            int down=1;
-            while(i<n && ratings[i]<ratings[i-1])
-            {
-               
-                sum+=down;
-                down++;
-                i++;
-            }
-            if(down>peak)
-            {
-                sum+=(down-peak);
+                candies[i]=1; //Complusory case
             }
 
         }
+        //Right Cons
+        for(int i=n-2;i>=0;i--)
+        {
+            if(ratings[i]>ratings[i+1])
+            {
+                candies[i]=Math.max(candies[i],candies[i+1]+1);
+                // Well It should be more than right, but it already having 
+                // a satisfying cand towards its left,so decide an ans
+                //without destroying both
+            }
+           
+        }
 
+        int sum=0;
+        for(int x:candies)
+        {
+            sum+=x;
+        }
 
         return sum;
         
