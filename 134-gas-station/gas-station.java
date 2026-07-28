@@ -2,29 +2,34 @@ class Solution {
     public int canCompleteCircuit(int[] gas, int[] cost) 
     {
         int n=gas.length;
+        int totalGas=0;
+        int totalCost=0;
+        for(int i=0;i<n;i++)
+        {
+            totalGas+=gas[i];
+            totalCost+=cost[i];
+        }
+        
+        if(totalGas<totalCost) return -1;
+
         int start=0;
         int totalFuel=0;
-        int travelled=0;
 
-        for(int i=0;i<2*n;i++)
+        for(int i=0;i<n;i++)
         {
-            totalFuel+=gas[i%n];
-            if(totalFuel<cost[i%n]) // We cant go to next
+            totalFuel+=(gas[i]-cost[i]);
+
+            if(totalFuel<0)
             {
-                start=(i+1)%n;
                 totalFuel=0;
-                travelled=0; // reset everything
+                start=i+1;
             }
-            else
-            {
-                totalFuel-=cost[i%n];
-                travelled++;
-            }
-            if(travelled==n) return start; //A complete cycle of n is Done
-           
+            
         }
 
-        return -1;
+       
+
+        return start;
         
     }
 }
