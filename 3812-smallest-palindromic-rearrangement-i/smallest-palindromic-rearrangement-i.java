@@ -1,18 +1,6 @@
 class Solution 
 {
-    public void reverse(StringBuilder str)
-    {
-        int i=0;
-        int j=str.length()-1;
-        while(i<j)
-        {
-            char temp=str.charAt(i);
-            str.setCharAt(i,str.charAt(j));
-            str.setCharAt(j,temp);
-            i++;
-            j--;
-        }
-    }
+
     public String smallestPalindrome(String s) 
     {
         StringBuilder left=new StringBuilder();
@@ -45,9 +33,11 @@ class Solution
         }
 
         //Reverse 
-        reverse(right);
+        right.reverse();
+        //Append
         left.append(middle);
-        left.append(right);  //Append
+        left.append(right); 
+        
         String ans=left.toString(); 
 
         return ans;
