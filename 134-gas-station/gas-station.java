@@ -13,14 +13,14 @@ class Solution {
             {
                 start=(i+1)%n;
                 totalFuel=0;
-                travelled=0;
+                travelled=0; // reset everything
             }
             else
             {
                 totalFuel-=cost[i%n];
                 travelled++;
             }
-            if(travelled==n) return start;
+            if(travelled==n) return start; //A complete cycle of n is Done
            
         }
 
