@@ -18,7 +18,7 @@ class Solution {
         {
             sum+=code[right%n];
             
-            while(right-left+1>k)
+            if(right-left+1>k)
             {
                 sum-=code[left%n];
                 left++;
