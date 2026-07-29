@@ -2,7 +2,7 @@ class Solution {
     public double findMaxAverage(int[] nums, int k) 
     {
         int n=nums.length;
-        double maxAvg=Double.NEGATIVE_INFINITY;
+        double maxSum=Double.NEGATIVE_INFINITY;
         // Its a fixed size wind prblm
         int left=0;
         double sum=0;  // Avg=(TotalSum/k)
@@ -16,12 +16,12 @@ class Solution {
             }
             if(right-left+1==k)
             {
-                maxAvg=Math.max(maxAvg,sum/k);
+                maxSum=Math.max(maxSum,sum);
             }
 
         }
 
-        return maxAvg;
+        return maxSum/k;
         
     }
 }
