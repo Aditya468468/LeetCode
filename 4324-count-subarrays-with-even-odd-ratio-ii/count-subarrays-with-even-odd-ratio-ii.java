@@ -63,9 +63,7 @@ class Solution
     public long countRatioSubarrays(int[] nums, int a, int b) 
     {
 
-        //y>0 fine,
-        // x/y <=a/b --> x*b<=a*y --> smells like sliding wind, ineq.\
-
+        
         int n=nums.length;
         long []prefix= new long[n+1];
         for(int i=0;i<n;i++)
