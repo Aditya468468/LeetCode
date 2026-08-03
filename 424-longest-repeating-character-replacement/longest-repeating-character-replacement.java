@@ -16,12 +16,6 @@ class Solution {
             while((right-left+1)-maxFreq>k)
             {
                 freq[s.charAt(left)-'A']--;
-                int newMax=0;
-                for(int r=0;r<26;r++)
-                {
-                   newMax=Math.max(newMax,freq[r]);
-                }
-                maxFreq=newMax;
                 left++;
             }
             maxLen=Math.max(maxLen,(right-left+1));
