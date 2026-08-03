@@ -1,0 +1,34 @@
+class Solution {
+    public int maxConsecutiveAnswers(String s, int k) 
+    {
+    
+        int maxLen=0;
+        int n=s.length();
+        int[]freq=new int[26];
+        int maxFreq=0;
+        int left=0;
+        for(int right=0;right<n;right++)
+        {
+            freq[s.charAt(right)-'A']++;
+            if(freq[s.charAt(right)-'A']>maxFreq)
+            {
+                maxFreq=freq[s.charAt(right)-'A'];
+            }
+            while((right-left+1)-maxFreq>k)
+            {
+                freq[s.charAt(left)-'A']--;
+                int newMax=0;
+                for(int r=0;r<26;r++)
+                {
+                   newMax=Math.max(newMax,freq[r]);
+                }
+                maxFreq=newMax;
+                left++;
+            }
+            maxLen=Math.max(maxLen,(right-left+1));
+        }
+
+        return maxLen;
+        
+    }
+}
