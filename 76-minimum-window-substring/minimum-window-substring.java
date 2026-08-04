@@ -10,8 +10,9 @@ class Solution {
         }
         int matched=0;
         int minLen=Integer.MAX_VALUE;
-        String str="";
         int left=0;
+        int lIdx=-1;
+        int rIdx=-1;
         Map<Character,Integer> sMap=new HashMap<>();
         for(int right=0;right<s.length();right++)
         {
@@ -26,10 +27,12 @@ class Solution {
             }
             while(matched==tMap.size())
             {
+               
                 char c=s.charAt(left);
                 if(right-left+1<minLen)
                 {
-                    str=s.substring(left,right+1);
+                    lIdx=left;
+                    rIdx=right; // left and Right of valid ans
                     minLen=right-left+1;
                 }
                 sMap.put(c,sMap.get(c)-1);
@@ -43,8 +46,8 @@ class Solution {
                 left++;
             }
         }
-
-        return str;
+        if(lIdx==-1) return "";
+        return s.substring(lIdx,rIdx+1);
         
     }
 }
