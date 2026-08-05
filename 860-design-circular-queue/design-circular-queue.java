@@ -40,7 +40,15 @@ class MyCircularQueue
         {
             return false;
         }
-        front=(front+1)%capacity;
+        if(currSize==1) // Last element
+        {
+            front=-1;
+            rear=-1;   // Queue becomes empty, Reset Pointers
+        }
+        else
+        {
+            front=(front+1)%capacity;
+        }
         currSize--;
 
         return true;
