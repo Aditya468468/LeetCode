@@ -10,8 +10,12 @@ class MyStack
     
     public void push(int x) 
     {
-        q.offer(x); // Add to the last -> Last In
-        
+        q.offer(x); 
+        for(int i=0;i<q.size()-1;i++)
+        {
+            q.offer(q.poll());
+        }
+
     }
     
     public int pop() 
@@ -20,16 +24,9 @@ class MyStack
         {
             return -1;
         }
-        //q.poll() // Removes from First-> Not a stack 
-        int n=q.size();
-        Queue<Integer> temp=new LinkedList<>();
-        for(int i=0;i<n-1;i++)
-        {
-            temp.offer(q.poll());
-        }
+    
 
-        int element=q.poll(); //Last element.
-        q=temp;
+        int element=q.poll(); 
 
         return element;
        
@@ -42,17 +39,7 @@ class MyStack
             return -1;
         }
 
-        int n=q.size();
-        Queue<Integer> temp=new LinkedList<>();
-        for(int i=0;i<n-1;i++)
-        {
-            temp.offer(q.poll());
-        }
-
         int element=q.peek();
-        temp.offer(q.poll());
-
-        q=temp;
         return element;
         
     }
