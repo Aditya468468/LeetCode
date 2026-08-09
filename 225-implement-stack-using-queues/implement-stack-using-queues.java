@@ -1,47 +1,50 @@
 class MyStack 
 {
     Queue<Integer> q;
+    int topElem;
 
     public MyStack() 
     {
         q=new LinkedList<>();
+        topElem=-1;
         
     }
     
-    public void push(int x) 
+    public void push(int x)  //O(1)
     {
-        q.offer(x); 
-        for(int i=0;i<q.size()-1;i++)
-        {
-            q.offer(q.poll());
-        }
-
+        q.offer(x); // Add to the last -> Last In
+        topElem=x;
+        
     }
     
-    public int pop() 
+    public int pop()  // O(n)
     {
         if(q.isEmpty())
         {
             return -1;
         }
-    
-
-        int element=q.poll(); 
+        //q.poll() // Removes from First-> Not a stack 
+       
+        for(int i=0;i<q.size()-1;i++)
+        {
+            topElem=q.poll(); // Keep Updating the topElem throughout the cycle
+            q.offer(topElem);
+        }
+        // After Cycle the 2nd last Elem -> New TopElem
+        int element=q.poll(); //Last element.
 
         return element;
        
     }
 
-    public int top() 
+    public int top() // O(1)
     {
         if(q.isEmpty())
         {
             return -1;
         }
 
-        int element=q.peek();
-        return element;
-        
+        return topElem;
     }
     
     public boolean empty() 
