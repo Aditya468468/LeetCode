@@ -1,61 +1,53 @@
 class MyQueue 
 {
-    Stack<Integer> st;
+    Stack<Integer> s1; //used for enqueue
+    Stack<Integer> s2; //used for Dequeue
     int frontElem;
 
     public MyQueue() 
     {
-        st=new Stack<>();
-        frontElem=-1;
+        s1=new Stack<>();
+        s2=new Stack<>();
         
     }
 
     public void push(int x) 
     {
-        if(st.isEmpty())
-        {
-            frontElem=x;
-        }
-         st.push(x);
+       s1.push(x);
     }
 
     public int pop() 
     {
-        if(st.empty()) return -1;
-        Stack<Integer> temp = new Stack<>();
-        int size=st.size();
-        for(int i=0;i<size-1;i++)
-        {
-            frontElem=st.pop();
-            temp.push(frontElem);
-        }
-
-        int elem=st.pop();
-        while(!temp.isEmpty())
-        {
-            int top=temp.pop();
-            st.push(top);
-        }
-
-        if(st.empty())
-        {
-            frontElem=-1;
-        }
-
-        return elem;
-      
+       if(s2.isEmpty())
+       {
+          while(!s1.isEmpty())
+          {
+            s2.push(s1.pop());
+          }
+       }
+        if(s2.isEmpty()) return -1; //There was no prior enqueue
+        
+        return s2.pop();
     }
 
     public int peek() 
     {
-        if(st.empty()) return -1;
+        if(s2.isEmpty())
+        {
+            while(!s1.isEmpty())
+            {
+                s2.push(s1.pop());
+            }
+            
+        } 
+        if(s2.isEmpty()) return -1; //There was no prior enqueue
 
-        return frontElem;
+        return s2.peek();
         
     }
 
     public boolean empty() 
     {
-       return st.isEmpty();
+       return s1.isEmpty() && s2.isEmpty(); //Both is Empty 
     }
 }
