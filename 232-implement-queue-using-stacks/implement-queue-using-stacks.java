@@ -1,62 +1,61 @@
 class MyQueue 
 {
-    Stack<Integer> s;
-  
-    // stack works in LIFO-> insert at End
-    // Remove from end.
-    //Lets Map with queue
-    // Insert at End->Rear-> same as Stack
-    // Remove from Front-> Opposite of Stack-> we can emit same behaviour if we reverse it.
-
+    Stack<Integer> st;
+    int frontElem;
 
     public MyQueue() 
     {
-        s=new Stack<>(); 
+        st=new Stack<>();
+        frontElem=-1;
+        
     }
-    
+
     public void push(int x) 
     {
-       Stack<Integer> temp=new Stack<>();
-       while(!s.isEmpty())
-       {
-            temp.add(s.pop());
-       }
-       temp.add(x);
-       while(!temp.isEmpty())
-       {
-            s.push(temp.pop());
-       }
-
+        if(st.isEmpty())
+        {
+            frontElem=x;
+        }
+         st.push(x);
     }
-    
+
     public int pop() 
     {
-        if(s.isEmpty()) return -1;
+        if(st.empty()) return -1;
+        Stack<Integer> temp = new Stack<>();
+        int size=st.size();
+        for(int i=0;i<size-1;i++)
+        {
+            frontElem=st.pop();
+            temp.push(frontElem);
+        }
 
-        return s.pop();
+        int elem=st.pop();
+        while(!temp.isEmpty())
+        {
+            int top=temp.pop();
+            st.push(top);
+        }
 
-        
+        if(st.empty())
+        {
+            frontElem=-1;
+        }
+
+        return elem;
+      
     }
-    
+
     public int peek() 
     {
+        if(st.empty()) return -1;
 
-         if(s.isEmpty()) return -1;
-         return s.peek();
-    }
-    
-    public boolean empty() 
-    {
-        return s.isEmpty();
+        return frontElem;
         
     }
-}
 
-/**
- * Your MyQueue object will be instantiated and called as such:
- * MyQueue obj = new MyQueue();
- * obj.push(x);
- * int param_2 = obj.pop();
- * int param_3 = obj.peek();
- * boolean param_4 = obj.empty();
- */
+    public boolean empty() 
+    {
+       return st.isEmpty();
+    }
+}
