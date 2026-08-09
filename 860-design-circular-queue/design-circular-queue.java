@@ -13,7 +13,6 @@ class MyCircularQueue
         rear=-1;
         front=-1;
         currSize=0;
-        
     }
     
     public boolean enQueue(int value) 
@@ -96,6 +95,7 @@ class MyCircularQueue
         
     }
 }
+
 
 /**
  * Your MyCircularQueue object will be instantiated and called as such:
