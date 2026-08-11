@@ -1,34 +1,32 @@
 class Solution {
     public int missingInteger(int[] nums) 
     {
-
-        int prev=nums[0];
-        int sum=nums[0];
+        int preSum=nums[0];
         for(int i=1;i<nums.length;i++)
         {
-            if(nums[i]-prev==1)
+            if(nums[i]-1==nums[i-1])
             {
-                sum+=nums[i];
-                prev=nums[i];
+                preSum+=nums[i];
             }
             else
             {
-                break;
-            }
-
+                break; // nums[0]......nums[i]
+            } 
         }
-        HashSet<Integer> set=new HashSet<>();
+
+        Set<Integer> set=new HashSet<>();
         for(int x:nums)
         {
             set.add(x);
         }
-        while(set.contains(sum))
+
+        int x=preSum;
+        while(true)
         {
-            sum=sum+1;
+            if(!set.contains(x)) return x;
+            x++;
         }
-
-        return sum;
-
+        
         
     }
 }
