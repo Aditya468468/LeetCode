@@ -20,6 +20,9 @@ class Solution {
             {
                 direction=false; // opposite inwards 
             }
+            //Collsion only happens when, top is +ve
+            //If its Neg-> upcoming +ve -> outwards
+            // if incmng-> -ve--> same direction
          
             if(direction) // same direction-> Just Push it
             {
