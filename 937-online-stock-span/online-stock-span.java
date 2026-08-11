@@ -1,11 +1,11 @@
 class Pair
 {
     int price;
-    int spam;
-    public Pair(int price,int spam)
+    int span;
+    public Pair(int price,int span)
     {
         this.price = price;
-        this.spam=spam;
+        this.span=span;
     }
 }
 class StockSpanner 
@@ -20,18 +20,16 @@ class StockSpanner
     
     public int next(int price) 
     {
-        int spam=1;
+        int span=1;
 
         while(!st.isEmpty() && st.peek().price<=price)
         {
-            spam+=st.pop().spam;
+            span+=st.pop().span;
         }
 
-        st.push(new Pair(price,spam));
+        st.push(new Pair(price,span));
 
-        return spam;
-
-
+        return span;
         
     }
 }
