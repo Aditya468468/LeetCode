@@ -48,7 +48,7 @@ class Solution
                     double newPosition=p+(time*s);
                     if(newPosition<=target) // Yes it will catch it
                     {
-                        continue;
+                        continue; // Intially I updated the position, but its not needed.. as leader will decide irrespective of new positions
                     }
                     else
                     {
