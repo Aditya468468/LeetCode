@@ -1,69 +1,64 @@
 class Solution {
     public int[] asteroidCollision(int[] asteroids) 
     {
-        Stack<Integer> st=new Stack<>();
         int n=asteroids.length;
-        
+        Stack<Integer> st=new Stack<>();
+
         for(int i=0;i<n;i++)
-        {   
-            
+        {
             if(st.isEmpty())
             {
                 st.push(asteroids[i]);
                 continue;
             }
-            int top=st.peek();
-            //Lets Determine the Direction of Asteroid
-            int currAsteroid=asteroids[i];
-            boolean direction=true; // same 
-            if(currAsteroid<0 && top>0)
+            if(!st.isEmpty() && st.peek()<0) // A collison will never happen
             {
-                direction=false; // opposite inwards 
+                st.push(asteroids[i]);
+                continue;
             }
-            //Collsion only happens when, top is +ve
-            //If its Neg-> upcoming +ve -> outwards
-            // if incmng-> -ve--> same direction
-         
-            if(direction) // same direction-> Just Push it
+            // Now s.peek()-> +ve collison can happen 
+            if(!st.isEmpty() && asteroids[i]>0)
             {
-                st.push(currAsteroid);
+                st.push(asteroids[i]);
             }
-            else 
+            else if(!st.isEmpty() && asteroids[i]<0) //Collison will happen
             {
-                //Who survies
-                int absTop=Math.abs(top);
-                int absAsteroid=Math.abs(currAsteroid);
-                if(absTop==absAsteroid)
+                if(!st.isEmpty() && st.peek()>Math.abs(asteroids[i]))
                 {
-                    st.pop(); //No one survives
-                    continue;
+                    continue; // The Top survives
                 }
-                else if(absTop>absAsteroid)
+                if(!st.isEmpty() && st.peek()==Math.abs(asteroids[i]))
                 {
-                    continue; // Top one remains as it is
+                    st.pop();
                 }
                 else
                 {
-                    while(!st.isEmpty() && st.peek()>0 && Math.abs(st.peek())<absAsteroid)
+                    while(!st.isEmpty() && st.peek()>0 && st.peek()<Math.abs(asteroids[i]))
                     {
-                        st.pop(); // update the top
+                        st.pop();
                     }
                     if(st.isEmpty())
                     {
-                        st.push(currAsteroid);  //Put with its sign,Last survival
+                        st.push(asteroids[i]);
                     }
-                     else if (st.peek()<0) {
-                        // They are moving away now
-                        st.push(currAsteroid);
-                    }
-                    else if (Math.abs(st.peek())==absAsteroid) {
-                        // Both destroyed
+                    else if(st.peek()==Math.abs(asteroids[i]))
+                    {
                         st.pop();
-                    }                                                            
+                    }
+                    else if (st.peek() > Math.abs(asteroids[i])) 
+                    {
+                        continue;
+                    }
+                    else //st.peek()<0
+                    {
+                        st.push(asteroids[i]);
+                    }
                 }
-            }
-        }
 
+            }
+
+        }
+        
         int []survived=new int[st.size()];
         int idx=st.size()-1;
         //Backfill
