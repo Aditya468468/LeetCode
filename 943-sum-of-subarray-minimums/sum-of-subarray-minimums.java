@@ -13,7 +13,7 @@ class Solution {
         {
             if(!st.isEmpty())
             {
-                while(!st.isEmpty() && arr[st.peek()]>=arr[i])
+                while(!st.isEmpty() && arr[st.peek()]>arr[i])
                 {
                     nseR[st.pop()]=i;
                 }
@@ -25,12 +25,13 @@ class Solution {
             nseR[st.pop()]=n;
         }
 
-        //nseL
+        //nseEL-> next smaller or equal Element towards left
+        // [1,1]-> [1],[1,1],[1],[1,1]-> Here [1,1] Overlaps, we taking same sub-array twice-> Soo we can either take the equality from Right or Left  
         for(int i=n-1;i>=0;i--)
         {
             if(!st.isEmpty())
             {
-                while(!st.isEmpty() && arr[st.peek()]>arr[i])
+                while(!st.isEmpty() && arr[st.peek()]>=arr[i]) // Taking equal elemets also 
                 {
                     nseL[st.pop()]=i;
                 }
