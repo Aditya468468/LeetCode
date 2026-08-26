@@ -29,7 +29,7 @@ class Solution {
 
             if(map.containsKey('1') && map.get('1')==k) //valid
             {
-                while(s.charAt(left)=='0') //Trim the leading zero to get more smaller
+                while(s.charAt(left)=='0') //Trim the leading zero to get more smaller, As we need min, we Dec the len till we can still validate
                 {
                     left++;
                 }
