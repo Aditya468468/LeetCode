@@ -21,10 +21,15 @@ class Solution {
             }
         }
 
-        int validMaxIdx=Math.min(maxIdx+1,n-maxIdx);
-        int validMinIdx=Math.min(minIdx+1,n-minIdx);
+       int left=Math.min(maxIdx,minIdx);
+       int right=Math.max(maxIdx,minIdx);
 
-        return Math.min(validMaxIdx+validMinIdx,Math.min(Math.max(maxIdx+1,minIdx+1),Math.max(n-maxIdx,n-minIdx)));
+       int front=right+1;
+       int back=n-left;
+
+       int frontAndBack=(left+1)+(n-right);
+
+       return Math.min(front,Math.min(back,frontAndBack));
     }
         
     }
