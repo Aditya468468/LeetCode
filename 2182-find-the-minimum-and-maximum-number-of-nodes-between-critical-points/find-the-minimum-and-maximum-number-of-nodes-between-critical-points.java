@@ -11,48 +11,44 @@
 class Solution {
     public int[] nodesBetweenCriticalPoints(ListNode head) 
     {
-        if(head==null || head.next==null) return new int[]{-1,-1};
-        //Lets Just calculate all The Critical Points
-        List<Integer> list=new ArrayList<>();
+        if(head==null || head.next==null)
+        {
+            return new int[]{-1,-1};
+        }
         ListNode prev=head;
         ListNode curr=head.next;
-        int cnt=2;
-        int firstPoint = -1;
-        int prevPoint = -1;
-        int minDistance = Integer.MAX_VALUE;
+        int firstCritical=-1;
+        int prevCritical=-1;
+        int min=Integer.MAX_VALUE;
+        int node=2;
+
         while(curr.next!=null)
         {
-            ListNode nextNode=curr.next;
-            int currV = curr.val;
-            int nextV = nextNode.val;
-            int prevV = prev.val;
-            
-            if ((prevV < currV && currV > nextV) || (prevV > currV && currV < nextV)) 
+            if((prev.val<curr.val && curr.val>curr.next.val) || (prev.val>curr.val && curr.next.val>curr.val)) //Critcial Point
             {
-            // If this is the very first critical point found
-            if (firstPoint==-1) 
-            {
-                firstPoint=cnt;
-            } 
-            else 
-            {
-                // If we've already found a previous point, update the minimum distance
-                minDistance = Math.min(minDistance,cnt - prevPoint);
+                if(firstCritical==-1)
+                {
+                    firstCritical=node;
+                    prevCritical=node;
+                }
+                else
+                {
+                    min=Math.min(node-prevCritical,min);
+                    prevCritical=node;
+                }
+
             }
-            prevPoint=cnt;
-        }
+            node++;
             prev=curr;
             curr=curr.next;
-            cnt++;
         }
-        if (firstPoint == prevPoint) 
+        
+        if(firstCritical==-1 || firstCritical==prevCritical)
         {
-            return new int[]{-1, -1};// Just One Point 
+            return new int[]{-1,-1};
+
         }
-
-        int maxDistance = prevPoint-firstPoint;
-
-        return new int[]{minDistance,maxDistance};
+        return new int[]{min,prevCritical-firstCritical};
         
     }
 }
