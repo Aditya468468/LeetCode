@@ -1,24 +1,18 @@
 class Solution 
 {
-    public long sumOfMaximums(int[]nums)
+    public long sumOfMax(int[]nums)
     {
         int n=nums.length;
-        int[]ngE=new int[n]; // Stores index
-        int []pgeE=new int[n]; // Stores index 
+        int[]ngE=new int[n];
+        int []pgeE=new int[n];
         Stack<Integer> st=new Stack<>();
-        //Lets Find nGE
+
+        //Next Greater Element
         for(int i=0;i<n;i++)
         {
-            if(!st.isEmpty())
+            while(!st.isEmpty() && nums[st.peek()]<nums[i])
             {
-                while(!st.isEmpty() && nums[st.peek()]<nums[i])
-                {
-                    ngE[st.pop()]=i;
-                }
-                if(st.isEmpty())
-                {
-                    ngE[i]=n;
-                }
+                ngE[st.pop()]=i;
             }
             st.push(i);
         }
@@ -27,19 +21,12 @@ class Solution
             ngE[st.pop()]=n;
         }
 
-        //Lets Find pgeE
+        //Previous Greater Or Equal Element
         for(int i=n-1;i>=0;i--)
         {
-            if(!st.isEmpty())
+            while(!st.isEmpty() && nums[st.peek()]<=nums[i])
             {
-                while(!st.isEmpty() && nums[st.peek()]<=nums[i])
-                {
-                    pgeE[st.pop()]=i;
-                }
-                if(st.isEmpty())
-                {
-                    pgeE[i]=-1;
-                }
+                pgeE[st.pop()]=i;
             }
             st.push(i);
         }
@@ -47,37 +34,30 @@ class Solution
         {
             pgeE[st.pop()]=-1;
         }
-        
         long sum=0;
         for(int i=0;i<n;i++)
         {
-            sum+=(1L)*((long)nums[i]*(i-pgeE[i])*(ngE[i]-i));
+            int left=(i-pgeE[i]);
+            int right=(ngE[i]-i);
+            sum+=(long)nums[i]*left*right;
         }
 
         return sum;
 
-
     }
-
-     public long sumOfMinmums(int[]nums)
+     public long sumOfMin(int[]nums)
     {
         int n=nums.length;
-        int[]nsE=new int[n]; // Stores index
-        int []pseE=new int[n]; // Stores index 
+        int[]nsE=new int[n];
+        int []pseE=new int[n];
         Stack<Integer> st=new Stack<>();
-        //Lets Find nsE
+
+        //Next Smaller Element
         for(int i=0;i<n;i++)
         {
-            if(!st.isEmpty())
+            while(!st.isEmpty() && nums[st.peek()]>nums[i])
             {
-                while(!st.isEmpty() && nums[st.peek()]>nums[i])
-                {
-                    nsE[st.pop()]=i;
-                }
-                if(st.isEmpty())
-                {
-                    nsE[i]=n;
-                }
+                nsE[st.pop()]=i;
             }
             st.push(i);
         }
@@ -86,19 +66,12 @@ class Solution
             nsE[st.pop()]=n;
         }
 
-        //Lets Find pseE
+        //Previous smaller Or Equal Element
         for(int i=n-1;i>=0;i--)
         {
-            if(!st.isEmpty())
+            while(!st.isEmpty() && nums[st.peek()]>=nums[i])
             {
-                while(!st.isEmpty() && nums[st.peek()]>=nums[i])
-                {
-                    pseE[st.pop()]=i;
-                }
-                if(st.isEmpty())
-                {
-                    pseE[i]=-1;
-                }
+                pseE[st.pop()]=i;
             }
             st.push(i);
         }
@@ -106,23 +79,21 @@ class Solution
         {
             pseE[st.pop()]=-1;
         }
-        
+
         long sum=0;
         for(int i=0;i<n;i++)
         {
-            sum+=(1L)*((long)nums[i]*(i-pseE[i])*(nsE[i]-i));
+            int left=(i-pseE[i]);
+            int right=(nsE[i]-i);
+            sum+=(long)nums[i]*left*right;
         }
 
         return sum;
 
-
     }
 
-    public long subArrayRanges(int[] nums) 
+    public long subArrayRanges(int[] nums)
     {
-
-        return sumOfMaximums(nums)-sumOfMinmums(nums);
-        
-     
+        return sumOfMax(nums)-sumOfMin(nums);
     }
 }
