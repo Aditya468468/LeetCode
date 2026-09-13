@@ -17,10 +17,10 @@ class Solution
         int i=0;
         int j=n-1;
         k=k%n;
-    
+       
         reverseRow(grid,row,0,k-1);
         reverseRow(grid,row,k,n-1);
-         reverseRow(grid,row,0,n-1);
+        reverseRow(grid,row,0,n-1);
 
     }
     public void reverseCol(int [][]grid,int col,int i, int j)
