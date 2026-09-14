@@ -1,38 +1,34 @@
 class Solution {
     public int monotoneIncreasingDigits(int n) 
     {
-        StringBuilder num=new StringBuilder(Integer.toString(n));
-        if(num.length()==1) return n;
-        Stack<Integer> st=new Stack<>(); // Will store the Index
-        st.push(num.length()-1); // Last Idx
-
+        //Right to left as we want larger number,<=n
+        char []nums=Integer.toString(n).toCharArray();
+        //Converts, The n to char[]
+        int size=nums.length;
         
-        for(int i=num.length()-2;i>=0;i--)
+        for(int i=nums.length-2;i>=0;i--)
         {
-            int y=num.charAt(i+1)-'0';
-            int x=num.charAt(i)-'0';
-            if(x>y)
+            if(nums[i]>nums[i+1])
             {
-                while(!st.isEmpty() && x>y)
+                nums[i]--;
+                int j=i+1;
+                while(j<size && nums[j]!='9')
                 {
-                    num.setCharAt(st.pop(),'9');
+                    nums[j]='9';
+                    j++;
                 }
-                num.setCharAt(i,(char)(x-1+'0'));
-
             }
-            st.push(i);
-            
+        }
+        int i=0;
+        while(i<size && nums[i]=='0')
+        {
+            i++;
         }
 
-       int i=0;
-       while(num.charAt(i)=='0') // removing leading Zero
-       {
-            i++;
-       }
+
+        return Integer.parseInt(new String(nums));
 
 
-
-        return Integer.parseInt(num.substring(i));
         
     }
 }
