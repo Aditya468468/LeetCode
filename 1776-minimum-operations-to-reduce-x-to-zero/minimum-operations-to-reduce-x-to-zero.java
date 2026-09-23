@@ -5,12 +5,12 @@ class Solution {
         // similar to Maximum Cards to Obtain Ques
         //Can be solved with presum+ HashMaps
         //Lets try Sliding window--> sum< need--> inc the sum, if sum>k--> dec the sum, if ==k capture the length
-        Map<Integer,Integer> map=new HashMap<>();
-        map.put(0,-1);
-        int preSum=0;
+       
+
+
+       
         int totalSum=0;
         int n=nums.length;
-       
 
         for(int num:nums)
         {
@@ -21,20 +21,22 @@ class Solution {
         if(k<0) return -1;
         if (k==0) return n;
         int maxLen=Integer.MIN_VALUE;
-
-        for(int i=0;i<n;i++)
+        int sum=0;
+        int left=0;
+        for(int right=0;right<n;right++)
         {
-            preSum+=nums[i];
-            int needed=preSum-k;
-            if(map.containsKey(needed))
+            sum+=nums[right];
+
+            while(sum>k)
             {
-                int len=i-map.get(needed);
-                maxLen=Math.max(maxLen,len);
+                sum-=nums[left];
+                left++;
             }
-            
-            if(!map.containsKey(preSum)) //As we need maxLen 
+
+            if(sum==k) 
             {
-                map.put(preSum,i);
+                int len=right-left+1;
+                maxLen=Math.max(maxLen,len);
             }
 
         }
