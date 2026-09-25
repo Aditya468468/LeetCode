@@ -1,5 +1,6 @@
 class SmallestInfiniteSet 
 {
+    //Can use HashMap+DLL--> But ques need Heaps
     TreeSet<Integer> set;
 
     public SmallestInfiniteSet() 
