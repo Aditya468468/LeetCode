@@ -15,31 +15,27 @@
  */
 class Solution 
 {
-    public int height(TreeNode node)
+    public int check(TreeNode node)
     {
         if(node==null) return 0;
 
-        return 1+Math.max(height(node.left),height(node.right));
-
-    }   
-
-    public boolean check(TreeNode node)
-    {
-        if(node==null) return true;
-
-        
-        int left=height(node.left);
-        int right=height(node.right);
-
-        if(Math.abs(left-right)>1) return false;
-        return check(node.left) && check(node.right);
-    } 
+        int left=check(node.left);
+        int right=check(node.right);
+        if(left==-1) return -1;
+        if(right==-1) return -1; // If any side gives -1, we return it 
+        if(Math.abs(left-right)>1) return -1; // we check the ht diff
+ 
+        return 1+Math.max(left,right); // And we return the ht of tree we got 
+    }
     public boolean isBalanced(TreeNode root) 
     {
 
         if(root==null) return true;
-        return check(root);
+        if(check(root)==-1) return false;
 
+        return true;
+
+        
         
     }
 }
