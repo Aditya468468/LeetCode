@@ -17,21 +17,20 @@ class Solution
 {
     public boolean check(TreeNode p,TreeNode q)
     {
-        if(p==null && q==null) //if both reaches null--> True 
+        if(p==null && q==null)
         {
-            return true;
+            return true; // Both null sooo we checked.... 
         }
-        if(p==null || q==null) //If any single Node reaches null--> False
-        {
-            return false;
-        }
-        if(p.val!=q.val) return false; // Value Mismatch
+        if(p==null || q==null) return false;
 
-        return (check(p.left,q.left) && check(p.right,q.right));
+        if(p.val != q.val) return false;
+
+        return check(p.left,q.left) && check(p.right,q.right);
     }
     public boolean isSameTree(TreeNode p, TreeNode q) 
     {
-        return check(p,q);
 
+        return check(p,q);
+        
     }
 }
