@@ -13,33 +13,25 @@
  *     }
  * }
  */
-class Solution {
-    public int minDepth(TreeNode root) 
+class Solution 
+{
+    public int find(TreeNode node)
     {
-        //BFS Approach
-        Queue<TreeNode> q=new LinkedList<>();
-        int nodes =1;
-        if(root==null) return 0;
-        q.offer(root);
-        while(!q.isEmpty())
+        if(node==null) return 0;
+        if(node.right==null)
         {
-            int size=q.size();
-            for(int i = 0;i<size;i++)
-            {
-                TreeNode node=q.poll();
-                if(node.left==null && node.right==null) return nodes;
-                if(node.left!=null) q.offer(node.left);
-                if(node.right!=null) q.offer(node.right);
-            }
-
-            nodes++;
-
+            return 1+find(node.left);
+        }
+        if(node.left==null)
+        {
+            return 1+find(node.right);
         }
 
-        return -1;
-
-
-        
+        return 1+Math.min(find(node.right),find(node.left));
+    }
+    public int minDepth(TreeNode root) 
+    {
+        return find(root);
         
     }
 }
